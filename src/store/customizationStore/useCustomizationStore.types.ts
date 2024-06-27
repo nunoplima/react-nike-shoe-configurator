@@ -3,6 +3,7 @@ import { EColors, ESteps, ETextures } from '../../enums'
 interface ICustomizationStore {
   steps: {
     [ESteps.body]: {
+      selectedTexture: undefined
       selectedColor: EColors
     }
     [ESteps.tongue]: {
@@ -23,6 +24,7 @@ interface ICustomizationStore {
       texture: ETextures
     }
     [ESteps.laces]: {
+      selectedTexture: undefined
       selectedColor: EColors
     }
     [ESteps.heel]: {
@@ -30,16 +32,17 @@ interface ICustomizationStore {
       selectedColor: EColors
     }
     [ESteps.airLogo]: {
+      selectedTexture: undefined
       selectedColor: EColors
     }
     [ESteps.sole]: {
+      selectedTexture: undefined
       selectedColor: EColors
     }
   }
   currentStep: ESteps
-  goToNextStep: () => void
-  goToPreviousStep: () => void
   goToStep: (step: ESteps) => void
+  selectTexture: (texture: ETextures) => void
   selectColor: (color: EColors) => void
 }
 

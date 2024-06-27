@@ -6,6 +6,7 @@ export const STEPS: {
       [ESides.right]: number[]
       [ESides.left]: number[]
     }
+    textures: undefined
     colors: [
       EColors.light,
       EColors.wolfGrey,
@@ -87,6 +88,7 @@ export const STEPS: {
       [ESides.right]: number[]
       [ESides.left]: number[]
     }
+    textures: undefined
     colors: [
       EColors.light,
       EColors.wolfGrey,
@@ -117,6 +119,7 @@ export const STEPS: {
       [ESides.right]: number[]
       [ESides.left]: number[]
     }
+    textures: undefined
     colors: [
       EColors.light,
       EColors.wolfGrey,
@@ -133,6 +136,7 @@ export const STEPS: {
       [ESides.right]: number[]
       [ESides.left]: number[]
     }
+    textures: undefined
     colors: [
       EColors.light,
       EColors.wolfGrey,
@@ -150,6 +154,7 @@ export const STEPS: {
       [ESides.right]: [2, 0, -16],
       [ESides.left]: [2, 0, -16],
     },
+    textures: undefined,
     colors: [
       EColors.light,
       EColors.wolfGrey,
@@ -232,6 +237,7 @@ export const STEPS: {
       [ESides.right]: [2, -2, 0],
       [ESides.left]: [2, -2, 0],
     },
+    textures: undefined,
     colors: [
       EColors.light,
       EColors.wolfGrey,
@@ -262,6 +268,7 @@ export const STEPS: {
       [ESides.right]: [-8, -6, -16],
       [ESides.left]: [-8, -6, -16],
     },
+    textures: undefined,
     colors: [
       EColors.light,
       EColors.wolfGrey,
@@ -278,6 +285,7 @@ export const STEPS: {
       [ESides.right]: [7, 10, 0],
       [ESides.left]: [7, 10, 0],
     },
+    textures: undefined,
     colors: [
       EColors.light,
       EColors.wolfGrey,
@@ -293,6 +301,7 @@ export const STEPS: {
 
 export const INITIAL_STEPS = {
   [ESteps.body]: {
+    selectedTexture: undefined,
     selectedColor: EColors.hemp,
   },
   [ESteps.tongue]: {
@@ -313,6 +322,7 @@ export const INITIAL_STEPS = {
     texture: ETextures.leather,
   },
   [ESteps.laces]: {
+    selectedTexture: undefined,
     selectedColor: EColors.red,
   },
   [ESteps.heel]: {
@@ -320,9 +330,11 @@ export const INITIAL_STEPS = {
     selectedColor: EColors.red,
   },
   [ESteps.airLogo]: {
+    selectedTexture: undefined,
     selectedColor: EColors.light,
   },
   [ESteps.sole]: {
+    selectedTexture: undefined,
     selectedColor: EColors.red,
   },
 }
