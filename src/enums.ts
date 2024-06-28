@@ -4,21 +4,22 @@ enum EColors {
   wornBlue = '#7596a5',
   bleachCoral = '#f9b7ab',
   mintFoam = '#bee2d4',
-  sandDrift = '#d2c2b2',
+  sanddrift = '#d2c2b2',
   light = '#e1e4e6',
   red = '#b11a1a',
+  white = '#ffffff',
 }
 
 enum ESteps {
-  body = 'body',
-  tongue = 'tongue',
-  eyestay = 'eyestay',
-  mudGuard = 'mudGuard',
-  swoosh = 'swoosh',
-  laces = 'laces',
-  heel = 'heel',
-  airLogo = 'airLogo',
-  sole = 'sole',
+  body = 'Body',
+  tongue = 'Tongue',
+  eyestay = 'Eyestay',
+  mudguard = 'Mudguard',
+  swoosh = 'Swoosh',
+  laces = 'Laces',
+  heel = 'Heel',
+  airLogo = 'Air Logo',
+  sole = 'Sole',
 }
 
 enum ETextures {

@@ -14,7 +14,7 @@ interface ICustomizationStore {
       selectedTexture: ETextures
       selectedColor: EColors
     }
-    [ESteps.mudGuard]: {
+    [ESteps.mudguard]: {
       selectedTexture: ETextures
       selectedColor: EColors
     }
