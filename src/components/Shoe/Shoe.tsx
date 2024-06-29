@@ -10,7 +10,14 @@ Title: Nike Air Jordan
 import { animated } from '@react-spring/three'
 import { useGLTF } from '@react-three/drei'
 import { ThreeEvent } from '@react-three/fiber'
-import { FC, PropsWithChildren, useEffect, useRef } from 'react'
+import {
+  FC,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react'
 import useCameraControlsContext from '../../context/useCameraControlsContext'
 import { EColors, ESides, ESteps } from '../../enums'
 import { useAnimatedColorsPerStep } from '../../hooks/useAnimatedColorsPerStep'
@@ -24,7 +31,9 @@ import {
 export const Shoe: FC<PropsWithChildren> = (props) => {
   const cameraControlsRef = useCameraControlsContext()?.cameraControlsRef
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const shoeRef = useRef<any | null>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { nodes, materials }: { nodes: any; materials: any } = useGLTF(
     './models/air-jordans.gltf',
   )
@@ -42,6 +51,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
     swooshColor,
     heelColor,
     airLogoColor,
+    upperSoleColor,
     soleColor,
   } = useAnimatedColorsPerStep()
 
@@ -58,7 +68,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
     }, 20)
 
     return () => clearTimeout(timeout)
-  }, [])
+  }, [cameraControlsRef])
 
   const mudguardTexture = textures[steps[ESteps.mudguard].selectedTexture]
   const tongueTexture = textures[steps[ESteps.tongue].selectedTexture]
@@ -66,144 +76,165 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
   const swooshTexture = textures[steps[ESteps.swoosh].selectedTexture]
   const heelTexture = textures[steps[ESteps.heel].selectedTexture]
 
-  const handleGoToStep =
+  const handleGoToStep = useCallback(
     (step: ESteps, side: ESides = ESides.right) =>
-    (event: ThreeEvent<MouseEvent>) => {
-      // stop propagation
-      event.stopPropagation()
+      (event: ThreeEvent<MouseEvent>) => {
+        // stop propagation
+        event.stopPropagation()
 
-      // bail out if there is dragging
-      // check: https://github.com/pmndrs/react-three-fiber/issues/691
-      if (event.delta > 0 || !cameraControlsRef?.current) return
+        // bail out if there is dragging
+        // check: https://github.com/pmndrs/react-three-fiber/issues/691
+        if (event.delta > 0 || !cameraControlsRef?.current) return
 
-      // look at the new step meshes
-      const [camX, camY, camZ] = STEPS[step].lookAtPos[side]
-      cameraControlsRef.current.setPosition(camX, camY, camZ, true)
+        // look at the new step meshes
+        const [camX, camY, camZ] = STEPS[step].lookAtPos[side]
+        cameraControlsRef.current.setPosition(camX, camY, camZ, true)
 
-      // bail out if we are already in the correct step
-      if (step === currentStep) return
+        // bail out if we are already in the correct step
+        if (step === currentStep) return
 
-      goToStep(step)
-    }
+        goToStep(step)
+      },
+    [cameraControlsRef, currentStep, goToStep],
+  )
 
-  return (
-    <group {...props} ref={shoeRef} position={[1.2, 1.7, 0]}>
-      {/* RIGHT SHOE */}
-      <group rotation={[-Math.PI / 2, -0.136, 0]}>
-        <group rotation={[Math.PI / 2, 0, 0]}>
-          {/* back top inner */}
-          <mesh
-            geometry={nodes.Object_44.geometry}
-            material={materials['Main.029']}
-            position={[-0.027, 1.026, 1.086]}
-            rotation={[Math.PI, -0.263, Math.PI]}
-            material-color={EColors.sanddrift}
+  const renderBackTopInnerMesh = useMemo(
+    () => (
+      <mesh
+        geometry={nodes.Object_44.geometry}
+        material={materials['Main.029']}
+        position={[-0.027, 1.026, 1.086]}
+        rotation={[Math.PI, -0.263, Math.PI]}
+        material-color={EColors.sanddrift}
+      />
+    ),
+    [materials, nodes],
+  )
+
+  const renderHeelMeshes = useMemo(
+    () => (
+      <>
+        <mesh
+          geometry={nodes.Object_4.geometry}
+          material={materials['Main.021']}
+          position={[0.35, -0.465, 1.023]}
+          rotation={[-Math.PI, 0, -Math.PI]}
+          onClick={handleGoToStep(ESteps.heel)}
+        >
+          <animated.meshStandardMaterial {...heelTexture} color={heelColor} />
+        </mesh>
+        {/* swoosh square */}
+        <mesh
+          geometry={nodes.Object_6.geometry}
+          material={materials['Main.021']}
+          position={[0.677, 0.202, 0.985]}
+          rotation={[1.555, 0.066, Math.PI / 2]}
+        >
+          <animated.meshStandardMaterial {...heelTexture} color={heelColor} />
+        </mesh>
+        {/* top */}
+        <mesh
+          geometry={nodes.Object_8.geometry}
+          material={materials['Main.021']}
+          position={[-0.077, 0.527, 1.102]}
+          rotation={[0, -1.571, 0]}
+          onClick={handleGoToStep(ESteps.airLogo)}
+        >
+          <animated.meshStandardMaterial {...heelTexture} color={heelColor} />
+        </mesh>
+      </>
+    ),
+    [handleGoToStep, heelColor, heelTexture, materials, nodes],
+  )
+
+  const renderAirJordanLogoMesh = useCallback(
+    (side: ESides = ESides.right) => (
+      <animated.mesh
+        geometry={nodes.Object_28.geometry}
+        material={materials['Main.031']}
+        position={[-0.098, 0.51, 1.739]}
+        rotation={[0.11, 0.21, -0.359]}
+        material-color={airLogoColor}
+        castShadow
+        onClick={handleGoToStep(ESteps.airLogo, side)}
+      />
+    ),
+    [airLogoColor, handleGoToStep, materials, nodes],
+  )
+
+  const renderBodyMeshes = useCallback(
+    (side: ESides = ESides.right) => (
+      <>
+        {/* body main */}
+        <animated.mesh
+          geometry={nodes.Object_12.geometry}
+          material={materials['Main.008']}
+          position={[-0.509, -0.231, 1.185]}
+          rotation={[Math.PI, -0.343, Math.PI]}
+          material-color={bodyColor}
+          onClick={handleGoToStep(ESteps.body, side)}
+        />
+        {/* front body */}
+        <mesh
+          geometry={nodes.Object_20.geometry}
+          material={materials['Main.008']}
+          position={[-2.606, -0.469, 1.214]}
+          rotation={[0, -1.571, 0]}
+          receiveShadow
+          onClick={handleGoToStep(ESteps.body, side)}
+        />
+        {/* center body */}
+        <mesh
+          geometry={nodes.Object_22.geometry}
+          material={materials['Main.008']}
+          position={[-0.363, 0.238, 1.113]}
+          rotation={[Math.PI, -0.343, Math.PI]}
+          onClick={handleGoToStep(ESteps.body, side)}
+        />
+        {/* top body*/}
+        <mesh
+          geometry={nodes.Object_10.geometry}
+          material={materials['Main.008']}
+          position={[0.09, 0.86, 1.074]}
+          rotation={[Math.PI, -0.263, Math.PI]}
+        />
+      </>
+    ),
+    [bodyColor, handleGoToStep, materials, nodes],
+  )
+
+  const renderTongueMeshes = useCallback(
+    (side: ESides = ESides.right) => (
+      <>
+        {/* tongue */}
+        <mesh
+          geometry={nodes.Object_42.geometry}
+          material={materials['Main.026']}
+          position={[-0.952, 0.44, 1.227]}
+          rotation={[Math.PI / 2, -1.019, Math.PI / 2]}
+          receiveShadow
+          onClick={handleGoToStep(ESteps.tongue)}
+        >
+          <animated.meshStandardMaterial
+            {...tongueTexture}
+            color={tongueColor}
           />
+        </mesh>
+        {/* behind nike tongue logo */}
+        <mesh
+          geometry={nodes.Object_24.geometry}
+          material={materials.Main}
+          position={[-0.654, 1.025, 1.161]}
+          rotation={[Math.PI / 2, -1.019, Math.PI / 2]}
+        >
+          <animated.meshStandardMaterial
+            {...tongueTexture}
+            color={tongueColor}
+          />
+        </mesh>
 
-          {/* TOP AND HEEL */}
-          {/* heel */}
-          <mesh
-            geometry={nodes.Object_4.geometry}
-            material={materials['Main.021']}
-            position={[0.35, -0.465, 1.023]}
-            rotation={[-Math.PI, 0, -Math.PI]}
-            onClick={handleGoToStep(ESteps.heel)}
-          >
-            <animated.meshStandardMaterial {...heelTexture} color={heelColor} />
-          </mesh>
-          {/* swoosh square */}
-          <mesh
-            geometry={nodes.Object_6.geometry}
-            material={materials['Main.021']}
-            position={[0.677, 0.202, 0.985]}
-            rotation={[1.555, 0.066, Math.PI / 2]}
-          >
-            <animated.meshStandardMaterial {...heelTexture} color={heelColor} />
-          </mesh>
-          {/* top */}
-          <mesh
-            geometry={nodes.Object_8.geometry}
-            material={materials['Main.021']}
-            position={[-0.077, 0.527, 1.102]}
-            rotation={[0, -1.571, 0]}
-          >
-            <animated.meshStandardMaterial {...heelTexture} color={heelColor} />
-          </mesh>
-
-          {/* AIR JORDAN SYMBOL */}
-          <animated.mesh
-            geometry={nodes.Object_28.geometry}
-            material={materials['Main.031']}
-            position={[-0.098, 0.51, 1.739]}
-            rotation={[0.11, 0.21, -0.359]}
-            material-color={airLogoColor}
-            castShadow
-            onClick={handleGoToStep(ESteps.airLogo)}
-          />
-
-          {/* BODY */}
-          {/* body main */}
-          <animated.mesh
-            geometry={nodes.Object_12.geometry}
-            material={materials['Main.008']}
-            position={[-0.509, -0.231, 1.185]}
-            rotation={[Math.PI, -0.343, Math.PI]}
-            material-color={bodyColor}
-            onClick={handleGoToStep(ESteps.body)}
-          />
-          {/* front body */}
-          <mesh
-            geometry={nodes.Object_20.geometry}
-            material={materials['Main.008']}
-            position={[-2.606, -0.469, 1.214]}
-            rotation={[0, -1.571, 0]}
-            receiveShadow
-            onClick={handleGoToStep(ESteps.body)}
-          />
-          {/* center body */}
-          <mesh
-            geometry={nodes.Object_22.geometry}
-            material={materials['Main.008']}
-            position={[-0.363, 0.238, 1.113]}
-            rotation={[Math.PI, -0.343, Math.PI]}
-            onClick={handleGoToStep(ESteps.body)}
-          />
-          {/* top body*/}
-          <mesh
-            geometry={nodes.Object_10.geometry}
-            material={materials['Main.008']}
-            position={[0.09, 0.86, 1.074]}
-            rotation={[Math.PI, -0.263, Math.PI]}
-          />
-
-          {/* TONGUE */}
-          {/* tongue */}
-          <mesh
-            geometry={nodes.Object_42.geometry}
-            material={materials['Main.026']}
-            position={[-0.952, 0.44, 1.227]}
-            rotation={[Math.PI / 2, -1.019, Math.PI / 2]}
-            receiveShadow
-            onClick={handleGoToStep(ESteps.tongue)}
-          >
-            <animated.meshStandardMaterial
-              {...tongueTexture}
-              color={tongueColor}
-            />
-          </mesh>
-          {/* behind nike tongue logo */}
-          <mesh
-            geometry={nodes.Object_24.geometry}
-            material={materials.Main}
-            position={[-0.654, 1.025, 1.161]}
-            rotation={[Math.PI / 2, -1.019, Math.PI / 2]}
-          >
-            <animated.meshStandardMaterial
-              {...tongueTexture}
-              color={tongueColor}
-            />
-          </mesh>
-          {/* tongue nike logo */}
+        {/* tongue nike logo */}
+        {side === ESides.right ? (
           <mesh
             geometry={nodes.Object_26.geometry}
             material={materials['Main.007']}
@@ -211,267 +242,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
             rotation={[1.6, -0.914, 1.601]}
             castShadow
           />
-
-          {/* EYESTAY */}
-          {/* eyestay top */}
-          <mesh
-            geometry={nodes.Object_32.geometry}
-            material={materials['Main.015']}
-            position={[-0.982, 0.385, 1.193]}
-            rotation={[Math.PI / 2, 0.595, -Math.PI]}
-            castShadow
-            receiveShadow
-            onClick={handleGoToStep(ESteps.eyestay)}
-          >
-            <animated.meshStandardMaterial
-              {...eyestayTexture}
-              color={eyestayColor}
-            />
-          </mesh>
-          {/* eyestay bottom */}
-          <mesh
-            geometry={nodes.Object_16.geometry}
-            material={materials['Main.015']}
-            position={[-1.828, -0.393, 1.304]}
-            rotation={[Math.PI / 2, 0, -Math.PI]}
-            castShadow
-            receiveShadow
-            onClick={handleGoToStep(ESteps.eyestay)}
-          >
-            <animated.meshStandardMaterial
-              {...eyestayTexture}
-              color={eyestayColor}
-            />
-          </mesh>
-
-          {/* MUDGUARD */}
-          <mesh
-            geometry={nodes.Object_18.geometry}
-            material={materials['Main.009']}
-            position={[-2.588, -0.701, 1.204]}
-            rotation={[Math.PI / 2, 0, -Math.PI]}
-            receiveShadow
-            onClick={handleGoToStep(ESteps.mudguard)}
-          >
-            <animated.meshStandardMaterial
-              {...mudguardTexture}
-              color={mudguardColor}
-            />
-          </mesh>
-
-          {/* SWOOSH */}
-          <mesh
-            geometry={nodes.Object_34.geometry}
-            material={materials['Main.019']}
-            position={[-0.194, -0.155, 1.081]}
-            rotation={[Math.PI / 2, 0, -Math.PI]}
-            onClick={handleGoToStep(ESteps.swoosh)}
-          >
-            <animated.meshStandardMaterial
-              {...swooshTexture}
-              color={swooshColor}
-            />
-          </mesh>
-
-          {/* LACES */}
-          <mesh
-            geometry={nodes.Object_40.geometry}
-            material={materials['Main.016']}
-            position={[-1.373, 0.202, 1.214]}
-            rotation={[-Math.PI, 1.562, -Math.PI]}
-            castShadow
-            receiveShadow
-            onClick={handleGoToStep(ESteps.laces)}
-          >
-            <animated.meshStandardMaterial
-              {...textures.rope}
-              displacementScale={0.02}
-              color={lacesColor}
-            />
-          </mesh>
-
-          {/* SOLE */}
-          {/* top sole */}
-          <animated.mesh
-            geometry={nodes.Object_48.geometry}
-            material={materials['Main.011']}
-            position={[-1.202, -0.931, 1.126]}
-            rotation={[0, -1.571, 0]}
-            material-color={soleColor}
-            castShadow
-            onClick={handleGoToStep(ESteps.sole)}
-          />
-          {/* top sole thread */}
-          <mesh
-            geometry={nodes.Object_38.geometry}
-            material={materials.Main}
-            position={[-1.343, -0.908, 1.16]}
-            rotation={[-1.571, -0.024, -1.571]}
-            scale={0.04}
-            castShadow
-          >
-            <animated.meshStandardMaterial color={soleColor} />
-          </mesh>
-          {/* sole circle */}
-          <mesh
-            geometry={nodes.Object_14.geometry}
-            material={materials['Main.011']}
-            position={[-2.289, -1.256, 0.921]}
-            rotation={[Math.PI / 2, 0, -2.052]}
-            castShadow
-          />
-          {/* sole */}
-          <mesh
-            geometry={nodes.Object_46.geometry}
-            material={materials['Main.011']}
-            position={[-2.325, -1.228, 1.159]}
-            rotation={[Math.PI / 2, 0, -2.052]}
-            castShadow
-          />
-          {/* sole */}
-          <mesh
-            geometry={nodes.Object_50.geometry}
-            material={materials['Main.011']}
-            position={[-1.278, -1.193, 1.176]}
-            rotation={[Math.PI / 2, 0, -2.052]}
-            castShadow
-          />
-          {/* sole */}
-          <mesh
-            geometry={nodes.Object_30.geometry}
-            material={materials['Main.011']}
-            position={[-1.355, -1.233, 1.137]}
-            rotation={[Math.PI / 2, 0, -2.052]}
-            castShadow
-          />
-          {/* sole logo */}
-          <mesh
-            geometry={nodes.Object_36.geometry}
-            material={materials['Main.011']}
-            position={[-1.131, -1.255, 1.283]}
-            rotation={[Math.PI / 2, 0, -2.052]}
-          />
-        </group>
-      </group>
-
-      {/* LEFT SHOE */}
-      <group
-        position={[-0.002, 0.025, 0.001]}
-        rotation={[Math.PI / 2, 0.136, Math.PI]}
-        scale={-1}
-      >
-        <group rotation={[Math.PI / 2, 0, 0]}>
-          {/* back top inner */}
-          <mesh
-            geometry={nodes.Object_44001.geometry}
-            material={materials['Main.029']}
-            position={[-0.027, 1.026, 1.086]}
-            rotation={[Math.PI, -0.263, Math.PI]}
-            material-color={EColors.sanddrift}
-          />
-
-          {/* TOP AND HEEL */}
-          {/* heel */}
-          <mesh
-            geometry={nodes.Object_4001.geometry}
-            material={materials['Main.021']}
-            position={[0.35, -0.465, 1.023]}
-            rotation={[-Math.PI, 0, -Math.PI]}
-            onClick={handleGoToStep(ESteps.heel, ESides.left)}
-          >
-            <animated.meshStandardMaterial {...heelTexture} color={heelColor} />
-          </mesh>
-          {/* swoosh square */}
-          <mesh
-            geometry={nodes.Object_6001.geometry}
-            material={materials['Main.021']}
-            position={[0.677, 0.202, 0.985]}
-            rotation={[1.555, 0.066, Math.PI / 2]}
-          >
-            <animated.meshStandardMaterial {...heelTexture} color={heelColor} />
-          </mesh>
-          {/* top */}
-          <mesh
-            geometry={nodes.Object_8001.geometry}
-            material={materials['Main.021']}
-            position={[-0.077, 0.527, 1.102]}
-            rotation={[0, -1.571, 0]}
-          >
-            <animated.meshStandardMaterial {...heelTexture} color={heelColor} />
-          </mesh>
-
-          {/* AIR JORDAN SYMBOL */}
-          <mesh
-            geometry={nodes.Object_28002.geometry}
-            material={materials['Main.031']}
-            position={[-0.098, 0.51, 1.739]}
-            rotation={[0.11, 0.21, -0.359]}
-            castShadow
-            onClick={handleGoToStep(ESteps.airLogo, ESides.left)}
-          />
-
-          {/* BODY */}
-          {/* body main */}
-          <animated.mesh
-            geometry={nodes.Object_12001.geometry}
-            material={materials['Main.008']}
-            position={[-0.509, -0.231, 1.185]}
-            rotation={[Math.PI, -0.343, Math.PI]}
-            onClick={handleGoToStep(ESteps.body, ESides.left)}
-          />
-          {/* front body */}
-          <mesh
-            geometry={nodes.Object_20001.geometry}
-            material={materials['Main.008']}
-            position={[-2.606, -0.469, 1.214]}
-            rotation={[0, -1.571, 0]}
-            receiveShadow
-            onClick={handleGoToStep(ESteps.body, ESides.left)}
-          />
-          {/* center body */}
-          <mesh
-            geometry={nodes.Object_22001.geometry}
-            material={materials['Main.008']}
-            position={[-0.363, 0.238, 1.113]}
-            rotation={[Math.PI, -0.343, Math.PI]}
-            onClick={handleGoToStep(ESteps.body, ESides.left)}
-          />
-          {/* top body */}
-          <mesh
-            geometry={nodes.Object_10001.geometry}
-            material={materials['Main.008']}
-            position={[0.09, 0.86, 1.074]}
-            rotation={[Math.PI, -0.263, Math.PI]}
-          />
-
-          {/* TONGUE */}
-          {/* tongue */}
-          <mesh
-            geometry={nodes.Object_42001.geometry}
-            material={materials['Main.026']}
-            position={[-0.952, 0.44, 1.227]}
-            rotation={[Math.PI / 2, -1.019, Math.PI / 2]}
-            receiveShadow
-            onClick={handleGoToStep(ESteps.tongue, ESides.left)}
-          >
-            <animated.meshStandardMaterial
-              {...tongueTexture}
-              color={tongueColor}
-            />
-          </mesh>
-          {/* behind nike tongue logo */}
-          <mesh
-            geometry={nodes.Object_24001.geometry}
-            material={materials.Main}
-            position={[-0.654, 1.025, 1.161]}
-            rotation={[Math.PI / 2, -1.019, Math.PI / 2]}
-          >
-            <animated.meshStandardMaterial
-              {...tongueTexture}
-              color={tongueColor}
-            />
-          </mesh>
-          {/* tongue nike logo */}
+        ) : (
           <group
             position={[-0.709, 1.263, 1.21]}
             rotation={[1.6, -0.914, 1.601]}
@@ -484,142 +255,226 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
               castShadow
             />
           </group>
+        )}
+      </>
+    ),
+    [handleGoToStep, materials, nodes, tongueColor, tongueTexture],
+  )
 
-          {/* EYESTAY */}
-          {/* eyestay top */}
-          <mesh
-            geometry={nodes.Object_32001.geometry}
-            material={materials['Main.015']}
-            position={[-0.982, 0.385, 1.193]}
-            rotation={[Math.PI / 2, 0.595, -Math.PI]}
-            castShadow
-            receiveShadow
-            onClick={handleGoToStep(ESteps.eyestay, ESides.left)}
-          >
-            <animated.meshStandardMaterial
-              {...eyestayTexture}
-              color={eyestayColor}
-            />
-          </mesh>
-          {/* eyestay bottom */}
-          <mesh
-            geometry={nodes.Object_16001.geometry}
-            material={materials['Main.015']}
-            position={[-1.828, -0.393, 1.304]}
-            rotation={[Math.PI / 2, 0, -Math.PI]}
-            castShadow
-            receiveShadow
-            onClick={handleGoToStep(ESteps.eyestay, ESides.left)}
-          >
-            <animated.meshStandardMaterial
-              {...eyestayTexture}
-              color={eyestayColor}
-            />
-          </mesh>
+  const renderEyestayMeshes = useMemo(
+    () => (
+      <>
+        {/* eyestay top */}
+        <mesh
+          geometry={nodes.Object_32.geometry}
+          material={materials['Main.015']}
+          position={[-0.982, 0.385, 1.193]}
+          rotation={[Math.PI / 2, 0.595, -Math.PI]}
+          castShadow
+          receiveShadow
+          onClick={handleGoToStep(ESteps.eyestay)}
+        >
+          <animated.meshStandardMaterial
+            {...eyestayTexture}
+            color={eyestayColor}
+          />
+        </mesh>
+        {/* eyestay bottom */}
+        <mesh
+          geometry={nodes.Object_16.geometry}
+          material={materials['Main.015']}
+          position={[-1.828, -0.393, 1.304]}
+          rotation={[Math.PI / 2, 0, -Math.PI]}
+          castShadow
+          receiveShadow
+          onClick={handleGoToStep(ESteps.eyestay)}
+        >
+          <animated.meshStandardMaterial
+            {...eyestayTexture}
+            color={eyestayColor}
+          />
+        </mesh>
+      </>
+    ),
+    [eyestayColor, eyestayTexture, handleGoToStep, materials, nodes],
+  )
 
-          {/* MUDGUARD */}
-          <mesh
-            geometry={nodes.Object_18001.geometry}
-            material={materials['Main.009']}
-            position={[-2.588, -0.701, 1.204]}
-            rotation={[Math.PI / 2, 0, -Math.PI]}
-            receiveShadow
-            onClick={handleGoToStep(ESteps.mudguard, ESides.left)}
-          >
-            <animated.meshStandardMaterial
-              {...mudguardTexture}
-              color={mudguardColor}
-            />
-          </mesh>
+  const renderMudguardMesh = useCallback(
+    (side: ESides = ESides.right) => (
+      <mesh
+        geometry={nodes.Object_18.geometry}
+        material={materials['Main.009']}
+        position={[-2.588, -0.701, 1.204]}
+        rotation={[Math.PI / 2, 0, -Math.PI]}
+        receiveShadow
+        onClick={handleGoToStep(ESteps.mudguard, side)}
+      >
+        <animated.meshStandardMaterial
+          {...mudguardTexture}
+          color={mudguardColor}
+        />
+      </mesh>
+    ),
+    [handleGoToStep, materials, mudguardColor, mudguardTexture, nodes],
+  )
 
-          {/* SWOOSH */}
-          <mesh
-            geometry={nodes.Object_34001.geometry}
-            material={materials['Main.019']}
-            position={[-0.194, -0.155, 1.081]}
-            rotation={[Math.PI / 2, 0, -Math.PI]}
-            onClick={handleGoToStep(ESteps.swoosh, ESides.left)}
-          >
-            <animated.meshStandardMaterial
-              {...swooshTexture}
-              color={swooshColor}
-            />
-          </mesh>
+  const renderSwooshMesh = useCallback(
+    (side: ESides = ESides.right) => (
+      <mesh
+        geometry={nodes.Object_34.geometry}
+        material={materials['Main.019']}
+        position={[-0.194, -0.155, 1.081]}
+        rotation={[Math.PI / 2, 0, -Math.PI]}
+        onClick={handleGoToStep(ESteps.swoosh, side)}
+      >
+        <animated.meshStandardMaterial {...swooshTexture} color={swooshColor} />
+      </mesh>
+    ),
+    [handleGoToStep, materials, nodes, swooshColor, swooshTexture],
+  )
 
-          {/* LACES */}
-          <mesh
-            geometry={nodes.Object_40001.geometry}
-            material={materials['Main.016']}
-            position={[-1.373, 0.202, 1.214]}
-            rotation={[-Math.PI, 1.562, -Math.PI]}
-            castShadow
-            receiveShadow
-            onClick={handleGoToStep(ESteps.laces, ESides.left)}
-          >
-            <animated.meshStandardMaterial
-              {...textures.rope}
-              displacementScale={0.02}
-              color={lacesColor}
-            />
-          </mesh>
+  const renderLacesMesh = useMemo(
+    () => (
+      <mesh
+        geometry={nodes.Object_40.geometry}
+        material={materials['Main.016']}
+        position={[-1.373, 0.202, 1.214]}
+        rotation={[-Math.PI, 1.562, -Math.PI]}
+        castShadow
+        receiveShadow
+        onClick={handleGoToStep(ESteps.laces)}
+      >
+        <animated.meshStandardMaterial
+          {...textures.rope}
+          displacementScale={0.02}
+          color={lacesColor}
+        />
+      </mesh>
+    ),
+    [handleGoToStep, lacesColor, materials, nodes, textures.rope],
+  )
 
-          {/* SOLE */}
-          {/* top sole */}
-          <animated.mesh
-            geometry={nodes.Object_48001.geometry}
-            material={materials['Main.011']}
-            position={[-1.202, -0.931, 1.126]}
-            rotation={[0, -1.571, 0]}
-            castShadow
-            onClick={handleGoToStep(ESteps.sole, ESides.left)}
-          />
-          {/* top sole thread */}
-          <mesh
-            geometry={nodes.Object_38001.geometry}
-            material={materials.Main}
-            position={[-1.343, -0.908, 1.16]}
-            rotation={[-1.571, -0.024, -1.571]}
-            scale={0.04}
-            castShadow
-          >
-            <animated.meshStandardMaterial color={soleColor} />
-          </mesh>
-          {/* sole circle */}
-          <mesh
-            geometry={nodes.Object_14001.geometry}
-            material={materials['Main.011']}
-            position={[-2.289, -1.256, 0.921]}
-            rotation={[Math.PI / 2, 0, -2.052]}
-            castShadow
-          />
-          {/* sole */}
-          <mesh
-            geometry={nodes.Object_46001.geometry}
-            material={materials['Main.011']}
-            position={[-2.325, -1.228, 1.159]}
-            rotation={[Math.PI / 2, 0, -2.052]}
-          />
-          {/* sole */}
-          <mesh
-            geometry={nodes.Object_50001.geometry}
-            material={materials['Main.011']}
-            position={[-1.278, -1.193, 1.176]}
-            rotation={[Math.PI / 2, 0, -2.052]}
-          />
-          {/* sole */}
-          <mesh
-            geometry={nodes.Object_30001.geometry}
-            material={materials['Main.011']}
-            position={[-1.355, -1.233, 1.137]}
-            rotation={[Math.PI / 2, 0, -2.052]}
-          />
-          {/* sole logo */}
-          <mesh
-            geometry={nodes.Object_36001.geometry}
-            material={materials['Main.011']}
-            position={[-1.131, -1.255, 1.283]}
-            rotation={[Math.PI / 2, 0, -2.052]}
-          />
+  const renderUperSoleMeshes = useMemo(
+    () => (
+      <>
+        {/* top sole */}
+        <mesh
+          geometry={nodes.Object_48.geometry}
+          material={materials.Main}
+          position={[-1.202, -0.931, 1.126]}
+          rotation={[0, -1.571, 0]}
+          castShadow
+          onClick={handleGoToStep(ESteps.upperSole)}
+        >
+          <animated.meshStandardMaterial color={upperSoleColor} />
+        </mesh>
+        {/* top sole thread */}
+        <mesh
+          geometry={nodes.Object_38.geometry}
+          material={materials.Main}
+          position={[-1.343, -0.908, 1.16]}
+          rotation={[-1.571, -0.024, -1.571]}
+          scale={0.04}
+          castShadow
+        >
+          <animated.meshStandardMaterial color={upperSoleColor} />
+        </mesh>
+      </>
+    ),
+    [handleGoToStep, materials, nodes, upperSoleColor],
+  )
+
+  const renderSoleMeshes = useMemo(
+    () => (
+      <>
+        {/* sole circle */}
+        <animated.mesh
+          geometry={nodes.Object_14.geometry}
+          material={materials['Main.011']}
+          position={[-2.289, -1.256, 0.921]}
+          rotation={[Math.PI / 2, 0, -2.052]}
+          material-color={soleColor}
+          castShadow
+          onClick={handleGoToStep(ESteps.sole)}
+        />
+        {/* sole */}
+        <mesh
+          geometry={nodes.Object_46.geometry}
+          material={materials['Main.011']}
+          position={[-2.325, -1.228, 1.159]}
+          rotation={[Math.PI / 2, 0, -2.052]}
+          castShadow
+        />
+        {/* sole */}
+        <mesh
+          geometry={nodes.Object_50.geometry}
+          material={materials['Main.011']}
+          position={[-1.278, -1.193, 1.176]}
+          rotation={[Math.PI / 2, 0, -2.052]}
+          castShadow
+        />
+        {/* sole */}
+        <mesh
+          geometry={nodes.Object_30.geometry}
+          material={materials['Main.011']}
+          position={[-1.355, -1.233, 1.137]}
+          rotation={[Math.PI / 2, 0, -2.052]}
+          castShadow
+        />
+        {/* sole logo */}
+        <mesh
+          geometry={nodes.Object_36.geometry}
+          material={materials['Main.011']}
+          position={[-1.131, -1.255, 1.283]}
+          rotation={[Math.PI / 2, 0, -2.052]}
+        />
+      </>
+    ),
+    [handleGoToStep, materials, nodes, soleColor],
+  )
+
+  return (
+    <group
+      {...props}
+      ref={shoeRef}
+      position={[1.2, 1.7, 0]}
+      scale={[1.05, 1, 1]}
+    >
+      {/* RIGHT SHOE */}
+      <group rotation={[-Math.PI / 2, -0.136, 0]}>
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          {renderBackTopInnerMesh}
+          {renderHeelMeshes}
+          {renderAirJordanLogoMesh()}
+          {renderBodyMeshes()}
+          {renderTongueMeshes()}
+          {renderEyestayMeshes}
+          {renderMudguardMesh()}
+          {renderSwooshMesh()}
+          {renderLacesMesh}
+          {renderUperSoleMeshes}
+          {renderSoleMeshes}
+        </group>
+      </group>
+
+      {/* LEFT SHOE */}
+      <group
+        position={[-0.002, 0.025, 0.001]}
+        rotation={[Math.PI / 2, 0.136, Math.PI]}
+        scale={-1}
+      >
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          {renderBackTopInnerMesh}
+          {renderHeelMeshes}
+          {renderAirJordanLogoMesh(ESides.left)}
+          {renderBodyMeshes(ESides.left)}
+          {renderTongueMeshes(ESides.left)}
+          {renderEyestayMeshes}
+          {renderMudguardMesh(ESides.left)}
+          {renderSwooshMesh(ESides.left)}
+          {renderLacesMesh}
+          {renderUperSoleMeshes}
+          {renderSoleMeshes}
         </group>
       </group>
     </group>

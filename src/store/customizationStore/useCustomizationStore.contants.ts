@@ -3,7 +3,7 @@ import { EColors, ESides, ESteps, ETextures } from '../../enums'
 export const FIRST_STEP = ESteps.body
 
 export const FIRST_STEP_CAMERA_POSITION: [number, number, number] = [
-  -2.5, 2, 5.5,
+  -3.5, 2, 5.5,
 ]
 export const INITIAL_CAMERA_POSITION: [number, number, number] = [
   FIRST_STEP_CAMERA_POSITION[0],
@@ -59,6 +59,7 @@ export const STEPS = {
       EColors.light,
       EColors.wolfGrey,
       EColors.wornBlue,
+      EColors.blue,
       EColors.hemp,
       EColors.red,
       EColors.bleachCoral,
@@ -76,6 +77,7 @@ export const STEPS = {
       EColors.light,
       EColors.wolfGrey,
       EColors.wornBlue,
+      EColors.blue,
       EColors.hemp,
       EColors.red,
       EColors.bleachCoral,
@@ -88,7 +90,12 @@ export const STEPS = {
       [ESides.right]: [2, 1.5, 4],
       [ESides.left]: [2, 1.5, -4],
     },
-    textures: [ETextures.leather, ETextures.plastic, ETextures.wood],
+    textures: [
+      ETextures.suede,
+      ETextures.leather,
+      ETextures.plastic,
+      ETextures.wood,
+    ],
     colors: [
       EColors.light,
       EColors.wolfGrey,
@@ -98,6 +105,7 @@ export const STEPS = {
       EColors.bleachCoral,
       EColors.mintFoam,
       EColors.sanddrift,
+      EColors.black,
     ],
   },
   [ESteps.laces]: {
@@ -113,6 +121,7 @@ export const STEPS = {
       EColors.wornBlue,
       EColors.sanddrift,
       EColors.red,
+      EColors.black,
     ],
   },
   [ESteps.heel]: {
@@ -130,6 +139,7 @@ export const STEPS = {
       EColors.light,
       EColors.wolfGrey,
       EColors.wornBlue,
+      EColors.blue,
       EColors.hemp,
       EColors.red,
       EColors.bleachCoral,
@@ -152,23 +162,45 @@ export const STEPS = {
       EColors.bleachCoral,
       EColors.mintFoam,
       EColors.sanddrift,
+      EColors.black,
     ],
   },
-  [ESteps.sole]: {
+  [ESteps.upperSole]: {
     lookAtPos: {
-      [ESides.right]: [-3.7, -3, 0],
-      [ESides.left]: [-3.7, -3, 0],
+      [ESides.right]: [3.5, 2, 5.5],
+      [ESides.left]: [3.5, 2, 5.5],
     },
     textures: undefined,
     colors: [
       EColors.light,
       EColors.wolfGrey,
       EColors.wornBlue,
+      EColors.blue,
       EColors.hemp,
       EColors.red,
       EColors.bleachCoral,
       EColors.mintFoam,
       EColors.sanddrift,
+      EColors.black,
+    ],
+  },
+  [ESteps.sole]: {
+    lookAtPos: {
+      [ESides.right]: [-4, -3, 0],
+      [ESides.left]: [-4, -3, 0],
+    },
+    textures: undefined,
+    colors: [
+      EColors.light,
+      EColors.wolfGrey,
+      EColors.wornBlue,
+      EColors.blue,
+      EColors.hemp,
+      EColors.red,
+      EColors.bleachCoral,
+      EColors.mintFoam,
+      EColors.sanddrift,
+      EColors.black,
     ],
   },
 }
@@ -176,39 +208,42 @@ export const STEPS = {
 export const INITIAL_STEPS = {
   [ESteps.body]: {
     selectedTexture: undefined,
-    selectedColor: EColors.hemp,
+    selectedColor: EColors.light,
   },
   [ESteps.tongue]: {
     selectedTexture: ETextures.leather,
-    selectedColor: EColors.hemp,
+    selectedColor: EColors.light,
   },
   [ESteps.eyestay]: {
     selectedTexture: ETextures.leather,
-    selectedColor: EColors.red,
+    selectedColor: EColors.blue,
   },
   [ESteps.mudguard]: {
     selectedTexture: ETextures.leather,
-    selectedColor: EColors.red,
+    selectedColor: EColors.blue,
   },
   [ESteps.swoosh]: {
     selectedTexture: ETextures.leather,
-    selectedColor: EColors.red,
-    texture: ETextures.leather,
+    selectedColor: EColors.black,
   },
   [ESteps.laces]: {
     selectedTexture: undefined,
-    selectedColor: EColors.red,
+    selectedColor: EColors.black,
   },
   [ESteps.heel]: {
     selectedTexture: ETextures.leather,
-    selectedColor: EColors.red,
+    selectedColor: EColors.blue,
   },
   [ESteps.airLogo]: {
     selectedTexture: undefined,
-    selectedColor: EColors.sanddrift,
+    selectedColor: EColors.black,
+  },
+  [ESteps.upperSole]: {
+    selectedTexture: undefined,
+    selectedColor: EColors.light,
   },
   [ESteps.sole]: {
     selectedTexture: undefined,
-    selectedColor: EColors.red,
+    selectedColor: EColors.blue,
   },
 }

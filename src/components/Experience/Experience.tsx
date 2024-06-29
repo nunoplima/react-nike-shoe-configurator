@@ -2,28 +2,12 @@ import {
   CameraControls,
   ContactShadows,
   Environment,
-  Html,
   OrbitControls,
 } from '@react-three/drei'
 import { Suspense } from 'react'
 import useCameraControlsContext from '../../context/useCameraControlsContext'
 import Shoe from '../Shoe'
-
-export const Loading = () => (
-  <Html
-    as="div"
-    center
-    style={{
-      height: '100vh',
-      width: '100vw',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-  >
-    <img className="-mt-36 h-20 w-20 animate-spin" src="/icons/spinner.svg" />
-  </Html>
-)
+import Loading from '../ui/Loading'
 
 export const Experience = () => {
   const cameraControlsRef = useCameraControlsContext()?.cameraControlsRef
@@ -31,28 +15,27 @@ export const Experience = () => {
   return (
     <>
       <Environment preset="studio" environmentIntensity={0.3} />
-      <ContactShadows opacity={0.3} scale={7} blur={2} far={4} />
+      <ContactShadows opacity={0.4} scale={6} blur={2} far={4} />
 
-      <ambientLight intensity={0.4} />
       <directionalLight
-        position={[-2.2, 3.7, -1]}
+        position={[-2.4, 3, -1.2]}
         castShadow
         intensity={Math.PI * 1.2}
       />
       <directionalLight
-        position={[2.2, 3.7, -1]}
+        position={[2.2, 3, -1.2]}
         castShadow
         intensity={Math.PI * 1.2}
       />
       <directionalLight
-        position={[-2.2, 3.7, 1]}
+        position={[-2.4, 3, 1.2]}
         castShadow
         intensity={Math.PI * 1.2}
       />
       <directionalLight
-        position={[2.2, 3.7, 1]}
+        position={[2.2, 3, 1.2]}
         castShadow
-        intensity={Math.PI * 1.3}
+        intensity={Math.PI * 1.2}
       />
 
       <CameraControls ref={cameraControlsRef} enabled />

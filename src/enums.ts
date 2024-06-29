@@ -5,9 +5,11 @@ enum EColors {
   bleachCoral = '#f9b7ab',
   mintFoam = '#bee2d4',
   sanddrift = '#d2c2b2',
-  light = '#e1e4e6',
+  light = '#eeeeee',
   red = '#b11a1a',
   white = '#ffffff',
+  black = '#232323',
+  blue = '#208dce',
 }
 
 enum ESteps {
@@ -19,6 +21,7 @@ enum ESteps {
   laces = 'Laces',
   heel = 'Heel',
   airLogo = 'Air Logo',
+  upperSole = 'Upper Sole',
   sole = 'Sole',
 }
 

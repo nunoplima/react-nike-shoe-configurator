@@ -43,6 +43,10 @@ export const useAnimatedColorsPerStep = () => {
       partShouldBlink && currentStep === ESteps.airLogo
         ? EColors.white
         : steps[ESteps.airLogo].selectedColor,
+    [ESteps.upperSole]:
+      partShouldBlink && currentStep === ESteps.upperSole
+        ? EColors.white
+        : steps[ESteps.upperSole].selectedColor,
     [ESteps.sole]:
       partShouldBlink && currentStep === ESteps.sole
         ? EColors.white
@@ -58,6 +62,7 @@ export const useAnimatedColorsPerStep = () => {
     swooshColor: springColors[ESteps.swoosh],
     heelColor: springColors[ESteps.heel],
     airLogoColor: springColors[ESteps.airLogo],
+    upperSoleColor: springColors[ESteps.upperSole],
     soleColor: springColors[ESteps.sole],
   }
 }

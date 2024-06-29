@@ -21,7 +21,6 @@ interface ICustomizationStore {
     [ESteps.swoosh]: {
       selectedTexture: ETextures
       selectedColor: EColors
-      texture: ETextures
     }
     [ESteps.laces]: {
       selectedTexture: undefined
@@ -32,6 +31,10 @@ interface ICustomizationStore {
       selectedColor: EColors
     }
     [ESteps.airLogo]: {
+      selectedTexture: undefined
+      selectedColor: EColors
+    }
+    [ESteps.upperSole]: {
       selectedTexture: undefined
       selectedColor: EColors
     }

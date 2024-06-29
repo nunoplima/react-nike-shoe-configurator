@@ -168,6 +168,7 @@ const Colors: FC<IColors> = ({ currentStep }) => {
   const handleColorClick = (color: EColors) => () => {
     selectColor(color)
   }
+
   return (
     <div className="flex w-full justify-center gap-4 overflow-x-auto pb-4">
       {colors.map((color) => (

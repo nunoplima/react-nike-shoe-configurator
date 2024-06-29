@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-export const useDebouncedValue = <T = any>(
+export const useDebouncedValue = <T = unknown>(
   value: T,
   wait: number = 400,
   options = { leading: false },

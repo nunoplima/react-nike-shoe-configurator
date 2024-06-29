@@ -97,7 +97,13 @@ export const useTextures = () => {
       [ETextures.suede]: suedeTextureProps,
       [ETextures.rope]: ropeTextureProps,
     }),
-    [],
+    [
+      leatherTextureProps,
+      plasticTextureProps,
+      ropeTextureProps,
+      suedeTextureProps,
+      woodTextureProps,
+    ],
   )
 
   return textures

@@ -6,7 +6,7 @@ export const getKeyFromEnum = (
 ) => {
   try {
     const keyFromEnum = Object.entries(fromEnum)
-      .filter(([_key, value]) => value === valueToGet)
+      .filter(([, value]) => value === valueToGet)
       .map(([key]) => key)[0]
 
     return keyFromEnum
