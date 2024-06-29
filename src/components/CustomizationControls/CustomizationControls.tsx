@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { FC, useState } from 'react'
+import { FC, startTransition, useState } from 'react'
 import { ANIMATION_CONFIG } from '../../constants'
 import useCameraControlsContext from '../../context/useCameraControlsContext'
 import { EColors, ESides, ESteps, ETextures } from '../../enums'
@@ -39,7 +39,7 @@ const Actions: FC<IActions> = ({
   }
 
   const doGoToStep = (step: ESteps) => {
-    goToStep(step)
+    startTransition(() => goToStep(step))
 
     if (!cameraControlsRef?.current) return
 
@@ -103,7 +103,7 @@ const Carrousel: FC<ICarrousel> = ({
     <AnimatePresence mode="popLayout">
       <motion.div
         key={currentStep}
-        className="relative flex min-h-40 flex-col items-center justify-between pt-1 md:min-h-48"
+        className="relative flex h-40 flex-col items-center justify-between pt-1 md:h-48"
         initial={{
           x: currentStepIndex > debouncedCurrentStepIndex ? '30px' : '-30px',
           opacity: 0,

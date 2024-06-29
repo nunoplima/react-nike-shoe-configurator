@@ -14,29 +14,9 @@ export const Experience = () => {
 
   return (
     <>
-      <Environment preset="studio" environmentIntensity={0.3} />
+      <Environment preset="studio" environmentIntensity={0.6} />
       <ContactShadows opacity={0.4} scale={6} blur={2} far={4} />
-
-      <directionalLight
-        position={[-2.4, 3, -1.2]}
-        castShadow
-        intensity={Math.PI * 1.2}
-      />
-      <directionalLight
-        position={[2.2, 3, -1.2]}
-        castShadow
-        intensity={Math.PI * 1.2}
-      />
-      <directionalLight
-        position={[-2.4, 3, 1.2]}
-        castShadow
-        intensity={Math.PI * 1.2}
-      />
-      <directionalLight
-        position={[2.2, 3, 1.2]}
-        castShadow
-        intensity={Math.PI * 1.2}
-      />
+      <ambientLight intensity={0.6} />
 
       <CameraControls ref={cameraControlsRef} enabled />
       <OrbitControls

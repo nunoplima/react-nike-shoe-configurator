@@ -13,7 +13,9 @@ import { ThreeEvent } from '@react-three/fiber'
 import {
   FC,
   PropsWithChildren,
+  startTransition,
   useCallback,
+  useDeferredValue,
   useEffect,
   useMemo,
   useRef,
@@ -40,7 +42,6 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
 
   const steps = useCustomizationStore((state) => state.steps)
   const goToStep = useCustomizationStore((state) => state.goToStep)
-  const currentStep = useCustomizationStore((state) => state.currentStep)
 
   const {
     bodyColor,
@@ -70,11 +71,21 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
     return () => clearTimeout(timeout)
   }, [cameraControlsRef])
 
-  const mudguardTexture = textures[steps[ESteps.mudguard].selectedTexture]
-  const tongueTexture = textures[steps[ESteps.tongue].selectedTexture]
-  const eyestayTexture = textures[steps[ESteps.eyestay].selectedTexture]
-  const swooshTexture = textures[steps[ESteps.swoosh].selectedTexture]
-  const heelTexture = textures[steps[ESteps.heel].selectedTexture]
+  const mudguardTexture = useDeferredValue(
+    textures[steps[ESteps.mudguard].selectedTexture],
+  )
+  const tongueTexture = useDeferredValue(
+    textures[steps[ESteps.tongue].selectedTexture],
+  )
+  const eyestayTexture = useDeferredValue(
+    textures[steps[ESteps.eyestay].selectedTexture],
+  )
+  const swooshTexture = useDeferredValue(
+    textures[steps[ESteps.swoosh].selectedTexture],
+  )
+  const heelTexture = useDeferredValue(
+    textures[steps[ESteps.heel].selectedTexture],
+  )
 
   const handleGoToStep = useCallback(
     (step: ESteps, side: ESides = ESides.right) =>
@@ -86,16 +97,13 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
         // check: https://github.com/pmndrs/react-three-fiber/issues/691
         if (event.delta > 0 || !cameraControlsRef?.current) return
 
+        startTransition(() => goToStep(step))
+
         // look at the new step meshes
         const [camX, camY, camZ] = STEPS[step].lookAtPos[side]
         cameraControlsRef.current.setPosition(camX, camY, camZ, true)
-
-        // bail out if we are already in the correct step
-        if (step === currentStep) return
-
-        goToStep(step)
       },
-    [cameraControlsRef, currentStep, goToStep],
+    [cameraControlsRef, goToStep],
   )
 
   const renderBackTopInnerMesh = useMemo(
@@ -209,7 +217,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
         {/* tongue */}
         <mesh
           geometry={nodes.Object_42.geometry}
-          material={materials['Main.026']}
+          material={materials['Main.001']}
           position={[-0.952, 0.44, 1.227]}
           rotation={[Math.PI / 2, -1.019, Math.PI / 2]}
           receiveShadow
@@ -232,7 +240,6 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
             color={tongueColor}
           />
         </mesh>
-
         {/* tongue nike logo */}
         {side === ESides.right ? (
           <mesh
@@ -354,31 +361,28 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
     [handleGoToStep, lacesColor, materials, nodes, textures.rope],
   )
 
-  const renderUperSoleMeshes = useMemo(
+  const renderUpperSoleMeshes = useMemo(
     () => (
       <>
         {/* top sole */}
-        <mesh
+        <animated.mesh
           geometry={nodes.Object_48.geometry}
-          material={materials.Main}
+          material={materials['Main.011']}
           position={[-1.202, -0.931, 1.126]}
           rotation={[0, -1.571, 0]}
           castShadow
           onClick={handleGoToStep(ESteps.upperSole)}
-        >
-          <animated.meshStandardMaterial color={upperSoleColor} />
-        </mesh>
+          material-color={upperSoleColor}
+        />
         {/* top sole thread */}
         <mesh
           geometry={nodes.Object_38.geometry}
-          material={materials.Main}
+          material={materials['Main.011']}
           position={[-1.343, -0.908, 1.16]}
           rotation={[-1.571, -0.024, -1.571]}
           scale={0.04}
           castShadow
-        >
-          <animated.meshStandardMaterial color={upperSoleColor} />
-        </mesh>
+        />
       </>
     ),
     [handleGoToStep, materials, nodes, upperSoleColor],
@@ -390,44 +394,54 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
         {/* sole circle */}
         <animated.mesh
           geometry={nodes.Object_14.geometry}
-          material={materials['Main.011']}
+          material={materials.Main}
           position={[-2.289, -1.256, 0.921]}
           rotation={[Math.PI / 2, 0, -2.052]}
           material-color={soleColor}
           castShadow
           onClick={handleGoToStep(ESteps.sole)}
-        />
+        >
+          <animated.meshStandardMaterial color={soleColor} />
+        </animated.mesh>
         {/* sole */}
-        <mesh
+        <animated.mesh
           geometry={nodes.Object_46.geometry}
-          material={materials['Main.011']}
+          material={materials.Main}
           position={[-2.325, -1.228, 1.159]}
           rotation={[Math.PI / 2, 0, -2.052]}
           castShadow
-        />
+        >
+          <animated.meshStandardMaterial color={soleColor} />
+        </animated.mesh>
         {/* sole */}
-        <mesh
+        <animated.mesh
           geometry={nodes.Object_50.geometry}
-          material={materials['Main.011']}
+          material={materials.Main}
           position={[-1.278, -1.193, 1.176]}
           rotation={[Math.PI / 2, 0, -2.052]}
           castShadow
-        />
+        >
+          <animated.meshStandardMaterial color={soleColor} />
+        </animated.mesh>
         {/* sole */}
-        <mesh
+        <animated.mesh
           geometry={nodes.Object_30.geometry}
-          material={materials['Main.011']}
+          material={materials.Main}
           position={[-1.355, -1.233, 1.137]}
           rotation={[Math.PI / 2, 0, -2.052]}
           castShadow
-        />
+        >
+          <animated.meshStandardMaterial color={soleColor} />
+        </animated.mesh>
         {/* sole logo */}
-        <mesh
+        <animated.mesh
           geometry={nodes.Object_36.geometry}
-          material={materials['Main.011']}
+          material={materials.Main}
           position={[-1.131, -1.255, 1.283]}
           rotation={[Math.PI / 2, 0, -2.052]}
-        />
+        >
+          <animated.meshStandardMaterial color={soleColor} />
+        </animated.mesh>
       </>
     ),
     [handleGoToStep, materials, nodes, soleColor],
@@ -452,7 +466,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
           {renderMudguardMesh()}
           {renderSwooshMesh()}
           {renderLacesMesh}
-          {renderUperSoleMeshes}
+          {renderUpperSoleMeshes}
           {renderSoleMeshes}
         </group>
       </group>
@@ -473,7 +487,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
           {renderMudguardMesh(ESides.left)}
           {renderSwooshMesh(ESides.left)}
           {renderLacesMesh}
-          {renderUperSoleMeshes}
+          {renderUpperSoleMeshes}
           {renderSoleMeshes}
         </group>
       </group>

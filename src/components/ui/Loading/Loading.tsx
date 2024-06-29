@@ -4,6 +4,7 @@ export const Loading = () => (
   <Html
     as="div"
     center
+    onClick={(event) => event?.stopPropagation()}
     style={{
       height: '100vh',
       width: '100vw',
