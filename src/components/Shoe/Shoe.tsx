@@ -26,7 +26,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
 
   const shoeRef = useRef<any | null>(null)
   const { nodes, materials }: { nodes: any; materials: any } = useGLTF(
-    './models/air-jordans.glb',
+    './models/air-jordans.gltf',
   )
 
   const steps = useCustomizationStore((state) => state.steps)
@@ -626,4 +626,4 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
   )
 }
 
-useGLTF.preload('./models/air-jordans.glb')
+useGLTF.preload('./models/air-jordans.gltf')
