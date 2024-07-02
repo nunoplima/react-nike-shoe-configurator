@@ -1,8 +1,9 @@
-import { PropsWithChildren } from 'react'
+import { ReactNode } from 'react'
 
-interface IButton extends PropsWithChildren {
-  classNames: string
+interface IButton {
+  classNames?: string
   onClick?: () => void
+  children: ReactNode | ReactNode[]
 }
 
 export type { IButton }

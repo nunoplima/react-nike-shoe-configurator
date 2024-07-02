@@ -103,7 +103,7 @@ const Carrousel: FC<ICarrousel> = ({
     <AnimatePresence mode="popLayout">
       <motion.div
         key={currentStep}
-        className="relative flex h-40 flex-col items-center justify-between pt-1 md:h-48"
+        className="relative flex h-40 max-h-[20vh] flex-col items-center justify-between pt-1 md:h-48 md:max-h-[30vh]"
         initial={{
           x: currentStepIndex > debouncedCurrentStepIndex ? '30px' : '-30px',
           opacity: 0,
