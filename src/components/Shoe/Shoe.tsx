@@ -37,7 +37,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
   const shoeRef = useRef<any | null>(null)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { nodes, materials }: { nodes: any; materials: any } = useGLTF(
-    './models/air-jordans.gltf',
+    './models/air-jordans-1.gltf',
   )
 
   const steps = useCustomizationStore((state) => state.steps)
@@ -342,23 +342,18 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
 
   const renderLacesMesh = useMemo(
     () => (
-      <mesh
+      <animated.mesh
         geometry={nodes.Object_40.geometry}
         material={materials['Main.016']}
         position={[-1.373, 0.202, 1.214]}
         rotation={[-Math.PI, 1.562, -Math.PI]}
+        material-color={lacesColor}
         castShadow
         receiveShadow
         onClick={handleGoToStep(ESteps.laces)}
-      >
-        <animated.meshStandardMaterial
-          {...textures.rope}
-          displacementScale={0.02}
-          color={lacesColor}
-        />
-      </mesh>
+      />
     ),
-    [handleGoToStep, lacesColor, materials, nodes, textures.rope],
+    [handleGoToStep, lacesColor, materials, nodes],
   )
 
   const renderUpperSoleMeshes = useMemo(
@@ -394,66 +389,51 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
         {/* sole circle */}
         <animated.mesh
           geometry={nodes.Object_14.geometry}
-          material={materials.Main}
+          material={materials['Main.004']}
           position={[-2.289, -1.256, 0.921]}
           rotation={[Math.PI / 2, 0, -2.052]}
           material-color={soleColor}
           castShadow
           onClick={handleGoToStep(ESteps.sole)}
-        >
-          <animated.meshStandardMaterial color={soleColor} />
-        </animated.mesh>
+        />
         {/* sole */}
         <animated.mesh
           geometry={nodes.Object_46.geometry}
-          material={materials.Main}
+          material={materials['Main.004']}
           position={[-2.325, -1.228, 1.159]}
           rotation={[Math.PI / 2, 0, -2.052]}
           castShadow
-        >
-          <animated.meshStandardMaterial color={soleColor} />
-        </animated.mesh>
+        />
         {/* sole */}
         <animated.mesh
           geometry={nodes.Object_50.geometry}
-          material={materials.Main}
+          material={materials['Main.004']}
           position={[-1.278, -1.193, 1.176]}
           rotation={[Math.PI / 2, 0, -2.052]}
           castShadow
-        >
-          <animated.meshStandardMaterial color={soleColor} />
-        </animated.mesh>
+        />
         {/* sole */}
         <animated.mesh
           geometry={nodes.Object_30.geometry}
-          material={materials.Main}
+          material={materials['Main.004']}
           position={[-1.355, -1.233, 1.137]}
           rotation={[Math.PI / 2, 0, -2.052]}
           castShadow
-        >
-          <animated.meshStandardMaterial color={soleColor} />
-        </animated.mesh>
+        />
         {/* sole logo */}
         <animated.mesh
           geometry={nodes.Object_36.geometry}
-          material={materials.Main}
+          material={materials['Main.004']}
           position={[-1.131, -1.255, 1.283]}
           rotation={[Math.PI / 2, 0, -2.052]}
-        >
-          <animated.meshStandardMaterial color={soleColor} />
-        </animated.mesh>
+        />
       </>
     ),
     [handleGoToStep, materials, nodes, soleColor],
   )
 
   return (
-    <group
-      {...props}
-      ref={shoeRef}
-      position={[1.2, 1.7, 0]}
-      scale={[1.05, 1, 1]}
-    >
+    <group {...props} ref={shoeRef} position={[1, 1.7, 0]} scale={[1.05, 1, 1]}>
       {/* RIGHT SHOE */}
       <group rotation={[-Math.PI / 2, -0.136, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
@@ -495,4 +475,4 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
   )
 }
 
-useGLTF.preload('./models/air-jordans.gltf')
+useGLTF.preload('./models/air-jordans-1.gltf')

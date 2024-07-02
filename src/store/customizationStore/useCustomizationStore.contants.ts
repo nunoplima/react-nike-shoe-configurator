@@ -3,7 +3,7 @@ import { EColors, ESides, ESteps, ETextures } from '../../enums'
 export const FIRST_STEP = ESteps.body
 
 export const FIRST_STEP_CAMERA_POSITION: [number, number, number] = [
-  -3.5, 2, 5.5,
+  -4.5, 2, 5.5,
 ]
 export const INITIAL_CAMERA_POSITION: [number, number, number] = [
   FIRST_STEP_CAMERA_POSITION[0],
@@ -18,13 +18,7 @@ export const STEPS = {
       [ESides.left]: INITIAL_CAMERA_POSITION,
     },
     textures: undefined,
-    colors: [
-      EColors.light,
-      EColors.wolfGrey,
-      EColors.hemp,
-      EColors.wornBlue,
-      EColors.sanddrift,
-    ],
+    colors: [EColors.light, EColors.wolfGrey, EColors.hemp, EColors.mintFoam],
   },
 
   [ESteps.tongue]: {
@@ -32,16 +26,14 @@ export const STEPS = {
       [ESides.right]: [-6, 3, 0],
       [ESides.left]: [-6, 3, 0],
     },
-    textures: [ETextures.suede, ETextures.leather, ETextures.plastic],
+    textures: [ETextures.fabric, ETextures.leather],
     colors: [
       EColors.light,
       EColors.wolfGrey,
-      EColors.wornBlue,
       EColors.hemp,
       EColors.red,
       EColors.bleachCoral,
       EColors.mintFoam,
-      EColors.sanddrift,
     ],
   },
   [ESteps.eyestay]: {
@@ -49,22 +41,14 @@ export const STEPS = {
       [ESides.right]: [-6, 3, 0],
       [ESides.left]: [-6, 3, 0],
     },
-    textures: [
-      ETextures.suede,
-      ETextures.leather,
-      ETextures.plastic,
-      ETextures.wood,
-    ],
+    textures: [ETextures.fabric, ETextures.leather, ETextures.wood],
     colors: [
       EColors.light,
       EColors.wolfGrey,
-      EColors.wornBlue,
       EColors.blue,
       EColors.hemp,
       EColors.red,
-      EColors.bleachCoral,
       EColors.mintFoam,
-      EColors.sanddrift,
     ],
   },
   [ESteps.mudguard]: {
@@ -72,17 +56,15 @@ export const STEPS = {
       [ESides.right]: [-6, 3, 3],
       [ESides.left]: [-6, 3, -3],
     },
-    textures: [ETextures.suede, ETextures.leather, ETextures.plastic],
+    textures: [ETextures.fabric, ETextures.leather],
     colors: [
       EColors.light,
       EColors.wolfGrey,
-      EColors.wornBlue,
       EColors.blue,
       EColors.hemp,
       EColors.red,
       EColors.bleachCoral,
       EColors.mintFoam,
-      EColors.sanddrift,
     ],
   },
   [ESteps.swoosh]: {
@@ -90,22 +72,14 @@ export const STEPS = {
       [ESides.right]: [2, 1.5, 4],
       [ESides.left]: [2, 1.5, -4],
     },
-    textures: [
-      ETextures.suede,
-      ETextures.leather,
-      ETextures.plastic,
-      ETextures.wood,
-    ],
+    textures: [ETextures.fabric, ETextures.leather, ETextures.wood],
     colors: [
       EColors.light,
+      EColors.black,
       EColors.wolfGrey,
-      EColors.wornBlue,
       EColors.hemp,
       EColors.red,
-      EColors.bleachCoral,
       EColors.mintFoam,
-      EColors.sanddrift,
-      EColors.black,
     ],
   },
   [ESteps.laces]: {
@@ -116,12 +90,11 @@ export const STEPS = {
     textures: undefined,
     colors: [
       EColors.light,
+      EColors.black,
       EColors.wolfGrey,
       EColors.hemp,
-      EColors.wornBlue,
-      EColors.sanddrift,
+      EColors.mintFoam,
       EColors.red,
-      EColors.black,
     ],
   },
   [ESteps.heel]: {
@@ -129,22 +102,15 @@ export const STEPS = {
       [ESides.right]: [7, 2, 0],
       [ESides.left]: [7, 2, 0],
     },
-    textures: [
-      ETextures.suede,
-      ETextures.leather,
-      ETextures.plastic,
-      ETextures.wood,
-    ],
+    textures: [ETextures.fabric, ETextures.leather, ETextures.wood],
     colors: [
       EColors.light,
       EColors.wolfGrey,
-      EColors.wornBlue,
       EColors.blue,
       EColors.hemp,
       EColors.red,
       EColors.bleachCoral,
       EColors.mintFoam,
-      EColors.sanddrift,
     ],
   },
   [ESteps.airLogo]: {
@@ -155,14 +121,11 @@ export const STEPS = {
     textures: undefined,
     colors: [
       EColors.light,
+      EColors.black,
       EColors.wolfGrey,
-      EColors.wornBlue,
       EColors.hemp,
       EColors.red,
-      EColors.bleachCoral,
       EColors.mintFoam,
-      EColors.sanddrift,
-      EColors.black,
     ],
   },
   [ESteps.upperSole]: {
@@ -173,15 +136,12 @@ export const STEPS = {
     textures: undefined,
     colors: [
       EColors.light,
-      EColors.wolfGrey,
-      EColors.wornBlue,
+      EColors.black,
       EColors.blue,
       EColors.hemp,
       EColors.red,
       EColors.bleachCoral,
       EColors.mintFoam,
-      EColors.sanddrift,
-      EColors.black,
     ],
   },
   [ESteps.sole]: {
@@ -192,15 +152,12 @@ export const STEPS = {
     textures: undefined,
     colors: [
       EColors.light,
-      EColors.wolfGrey,
-      EColors.wornBlue,
+      EColors.black,
       EColors.blue,
       EColors.hemp,
       EColors.red,
       EColors.bleachCoral,
       EColors.mintFoam,
-      EColors.sanddrift,
-      EColors.black,
     ],
   },
 }

@@ -1330,7 +1330,7 @@
 		},
 		{
 			"doubleSided":true,
-			"name":"Main",
+			"name":"Main.004",
 			"normalTexture":{
 				"index":5
 			},
@@ -1390,16 +1390,34 @@
 		},
 		{
 			"doubleSided":true,
-			"name":"Main.007",
+			"name":"Main",
 			"normalTexture":{
 				"index":11
 			},
 			"pbrMetallicRoughness":{
-				"baseColorTexture":{
+				"baseColorFactor":[
+					0.800000011920929,
+					0.800000011920929,
+					0.800000011920929,
+					1
+				],
+				"metallicRoughnessTexture":{
 					"index":12
+				}
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Main.007",
+			"normalTexture":{
+				"index":13
+			},
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":14
 				},
 				"metallicRoughnessTexture":{
-					"index":13
+					"index":15
 				}
 			}
 		},
@@ -1407,14 +1425,32 @@
 			"doubleSided":true,
 			"name":"Main.005",
 			"normalTexture":{
-				"index":14
+				"index":16
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":15
+					"index":17
 				},
 				"metallicRoughnessTexture":{
-					"index":16
+					"index":18
+				}
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Main.002",
+			"normalTexture":{
+				"index":19
+			},
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.800000011920929,
+					0.800000011920929,
+					0.800000011920929,
+					1
+				],
+				"metallicRoughnessTexture":{
+					"index":20
 				}
 			}
 		},
@@ -1429,13 +1465,16 @@
 					1
 				],
 				"metallicRoughnessTexture":{
-					"index":17
+					"index":21
 				}
 			}
 		},
 		{
 			"doubleSided":true,
-			"name":"Main.011",
+			"name":"Main.010",
+			"normalTexture":{
+				"index":22
+			},
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
 					0.800000011920929,
@@ -1444,7 +1483,25 @@
 					1
 				],
 				"metallicRoughnessTexture":{
-					"index":18
+					"index":23
+				}
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Main.011",
+			"normalTexture":{
+				"index":24
+			},
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.800000011920929,
+					0.800000011920929,
+					0.800000011920929,
+					1
+				],
+				"metallicRoughnessTexture":{
+					"index":25
 				}
 			}
 		},
@@ -1452,11 +1509,11 @@
 			"doubleSided":true,
 			"name":"Main.016",
 			"normalTexture":{
-				"index":19
+				"index":26
 			},
 			"pbrMetallicRoughness":{
 				"metallicRoughnessTexture":{
-					"index":20
+					"index":27
 				}
 			}
 		},
@@ -1471,7 +1528,7 @@
 					1
 				],
 				"metallicRoughnessTexture":{
-					"index":21
+					"index":28
 				}
 			}
 		},
@@ -1479,11 +1536,29 @@
 			"doubleSided":true,
 			"name":"Main.029",
 			"normalTexture":{
-				"index":22
+				"index":29
 			},
 			"pbrMetallicRoughness":{
 				"metallicRoughnessTexture":{
-					"index":23
+					"index":30
+				}
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Main.003",
+			"normalTexture":{
+				"index":31
+			},
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.800000011920929,
+					0.800000011920929,
+					0.800000011920929,
+					1
+				],
+				"metallicRoughnessTexture":{
+					"index":32
 				}
 			}
 		},
@@ -1491,11 +1566,29 @@
 			"doubleSided":true,
 			"name":"Main.018",
 			"normalTexture":{
-				"index":24
+				"index":33
 			},
 			"pbrMetallicRoughness":{
 				"metallicRoughnessTexture":{
-					"index":25
+					"index":34
+				}
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Main.015",
+			"normalTexture":{
+				"index":35
+			},
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.800000011920929,
+					0.800000011920929,
+					0.800000011920929,
+					1
+				],
+				"metallicRoughnessTexture":{
+					"index":36
 				}
 			}
 		},
@@ -1503,11 +1596,11 @@
 			"doubleSided":true,
 			"name":"Main.025",
 			"normalTexture":{
-				"index":26
+				"index":37
 			},
 			"pbrMetallicRoughness":{
 				"metallicRoughnessTexture":{
-					"index":27
+					"index":38
 				}
 			}
 		},
@@ -1515,14 +1608,50 @@
 			"doubleSided":true,
 			"name":"Main.006",
 			"normalTexture":{
-				"index":28
+				"index":39
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":29
+					"index":40
 				},
 				"metallicRoughnessTexture":{
-					"index":30
+					"index":41
+				}
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Main.013",
+			"normalTexture":{
+				"index":42
+			},
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.800000011920929,
+					0.800000011920929,
+					0.800000011920929,
+					1
+				],
+				"metallicRoughnessTexture":{
+					"index":43
+				}
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"Main.014",
+			"normalTexture":{
+				"index":44
+			},
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.800000011920929,
+					0.800000011920929,
+					0.800000011920929,
+					1
+				],
+				"metallicRoughnessTexture":{
+					"index":45
 				}
 			}
 		}
@@ -1833,7 +1962,7 @@
 						}
 					},
 					"indices":69,
-					"material":3,
+					"material":7,
 					"mode":4
 				}
 			]
@@ -1864,7 +1993,7 @@
 						}
 					},
 					"indices":76,
-					"material":3,
+					"material":7,
 					"mode":4
 				}
 			]
@@ -1895,7 +2024,7 @@
 						}
 					},
 					"indices":83,
-					"material":7,
+					"material":8,
 					"mode":4
 				}
 			]
@@ -1926,7 +2055,7 @@
 						}
 					},
 					"indices":90,
-					"material":8,
+					"material":9,
 					"mode":4
 				}
 			]
@@ -1957,7 +2086,7 @@
 						}
 					},
 					"indices":97,
-					"material":3,
+					"material":10,
 					"mode":4
 				}
 			]
@@ -2019,7 +2148,7 @@
 						}
 					},
 					"indices":111,
-					"material":9,
+					"material":11,
 					"mode":4
 				}
 			]
@@ -2050,7 +2179,7 @@
 						}
 					},
 					"indices":118,
-					"material":3,
+					"material":12,
 					"mode":4
 				}
 			]
@@ -2081,7 +2210,7 @@
 						}
 					},
 					"indices":125,
-					"material":10,
+					"material":13,
 					"mode":4
 				}
 			]
@@ -2112,7 +2241,7 @@
 						}
 					},
 					"indices":132,
-					"material":11,
+					"material":14,
 					"mode":4
 				}
 			]
@@ -2143,7 +2272,7 @@
 						}
 					},
 					"indices":139,
-					"material":12,
+					"material":15,
 					"mode":4
 				}
 			]
@@ -2174,7 +2303,7 @@
 						}
 					},
 					"indices":146,
-					"material":13,
+					"material":16,
 					"mode":4
 				}
 			]
@@ -2205,7 +2334,7 @@
 						}
 					},
 					"indices":153,
-					"material":3,
+					"material":17,
 					"mode":4
 				}
 			]
@@ -2236,7 +2365,7 @@
 						}
 					},
 					"indices":160,
-					"material":10,
+					"material":13,
 					"mode":4
 				}
 			]
@@ -2267,7 +2396,7 @@
 						}
 					},
 					"indices":167,
-					"material":3,
+					"material":7,
 					"mode":4
 				}
 			]
@@ -2422,7 +2551,7 @@
 						}
 					},
 					"indices":34,
-					"material":14,
+					"material":18,
 					"mode":4
 				}
 			]
@@ -2453,7 +2582,7 @@
 						}
 					},
 					"indices":41,
-					"material":3,
+					"material":19,
 					"mode":4
 				}
 			]
@@ -2546,7 +2675,7 @@
 						}
 					},
 					"indices":62,
-					"material":15,
+					"material":20,
 					"mode":4
 				}
 			]
@@ -2577,7 +2706,7 @@
 						}
 					},
 					"indices":69,
-					"material":3,
+					"material":7,
 					"mode":4
 				}
 			]
@@ -2608,7 +2737,7 @@
 						}
 					},
 					"indices":76,
-					"material":3,
+					"material":7,
 					"mode":4
 				}
 			]
@@ -2639,7 +2768,7 @@
 						}
 					},
 					"indices":83,
-					"material":16,
+					"material":21,
 					"mode":4
 				}
 			]
@@ -2670,7 +2799,7 @@
 						}
 					},
 					"indices":97,
-					"material":3,
+					"material":22,
 					"mode":4
 				}
 			]
@@ -2732,7 +2861,7 @@
 						}
 					},
 					"indices":111,
-					"material":9,
+					"material":11,
 					"mode":4
 				}
 			]
@@ -2763,7 +2892,7 @@
 						}
 					},
 					"indices":118,
-					"material":3,
+					"material":23,
 					"mode":4
 				}
 			]
@@ -2794,7 +2923,7 @@
 						}
 					},
 					"indices":125,
-					"material":10,
+					"material":13,
 					"mode":4
 				}
 			]
@@ -2825,7 +2954,7 @@
 						}
 					},
 					"indices":132,
-					"material":11,
+					"material":14,
 					"mode":4
 				}
 			]
@@ -2856,7 +2985,7 @@
 						}
 					},
 					"indices":139,
-					"material":12,
+					"material":15,
 					"mode":4
 				}
 			]
@@ -2887,7 +3016,7 @@
 						}
 					},
 					"indices":146,
-					"material":13,
+					"material":16,
 					"mode":4
 				}
 			]
@@ -2918,7 +3047,7 @@
 						}
 					},
 					"indices":153,
-					"material":3,
+					"material":7,
 					"mode":4
 				}
 			]
@@ -2949,7 +3078,7 @@
 						}
 					},
 					"indices":160,
-					"material":10,
+					"material":13,
 					"mode":4
 				}
 			]
@@ -2980,7 +3109,7 @@
 						}
 					},
 					"indices":167,
-					"material":3,
+					"material":7,
 					"mode":4
 				}
 			]
@@ -3011,7 +3140,7 @@
 						}
 					},
 					"indices":90,
-					"material":8,
+					"material":9,
 					"mode":4
 				}
 			]
@@ -3117,14 +3246,6 @@
 		{
 			"extensions":{
 				"EXT_texture_webp":{
-					"source":2
-				}
-			},
-			"sampler":0
-		},
-		{
-			"extensions":{
-				"EXT_texture_webp":{
 					"source":0
 				}
 			},
@@ -3157,6 +3278,38 @@
 		{
 			"extensions":{
 				"EXT_texture_webp":{
+					"source":1
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":2
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":0
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":1
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
 					"source":0
 				}
 			},
@@ -3182,6 +3335,70 @@
 			"extensions":{
 				"EXT_texture_webp":{
 					"source":0
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":1
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":0
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":1
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":0
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":0
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":1
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":0
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":1
 				}
 			},
 			"sampler":0
@@ -3254,6 +3471,38 @@
 			"extensions":{
 				"EXT_texture_webp":{
 					"source":2
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":0
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":1
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":0
+				}
+			},
+			"sampler":0
+		},
+		{
+			"extensions":{
+				"EXT_texture_webp":{
+					"source":1
 				}
 			},
 			"sampler":0
@@ -5577,7 +5826,7 @@
 	"buffers":[
 		{
 			"byteLength":2293976,
-			"uri":"air-jordans.bin"
+			"uri":"air-jordans-1.bin"
 		}
 	]
 }

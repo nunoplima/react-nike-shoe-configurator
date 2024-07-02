@@ -27,10 +27,8 @@ enum ESteps {
 
 enum ETextures {
   wood = 'wood',
-  plastic = 'plastic',
   leather = 'leather',
-  suede = 'suede',
-  rope = 'rope',
+  fabric = 'fabric',
 }
 
 enum ESides {

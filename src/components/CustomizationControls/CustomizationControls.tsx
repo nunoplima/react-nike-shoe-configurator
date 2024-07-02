@@ -170,32 +170,34 @@ const Colors: FC<IColors> = ({ currentStep }) => {
   }
 
   return (
-    <div className="flex w-full justify-center gap-4 overflow-x-auto pb-4">
-      {colors.map((color) => (
-        <button
-          key={color}
-          className="relative flex flex-col items-center justify-center"
-        >
-          <div
-            onClick={handleColorClick(color)}
-            className={`after:content-[''] after:bg-${getKeyFromEnum(color, EColors)} transition-border relative h-10 w-10 cursor-pointer rounded-full after:h-8 after:w-8 after:rounded-full ${selectedColor === color ? 'border border-lightGrey' : ''} flex items-center justify-center`}
-          />
+    <div className="flex w-full justify-center">
+      <div className="flex gap-4 overflow-x-auto pb-4">
+        {colors.map((color) => (
+          <button
+            key={color}
+            className="relative flex flex-col items-center justify-center first-of-type:pl-6 last-of-type:pr-6"
+          >
+            <div
+              onClick={handleColorClick(color)}
+              className={`after:content-[''] after:bg-${getKeyFromEnum(color, EColors)} transition-border relative h-10 w-10 cursor-pointer rounded-full after:h-8 after:w-8 after:rounded-full ${selectedColor === color ? 'border border-lightGrey' : ''} flex items-center justify-center`}
+            />
 
-          <AnimatePresence>
-            {color === selectedColor && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={ANIMATION_CONFIG}
-                className="absolute -bottom-4 whitespace-nowrap text-xs"
-              >
-                {camelCaseToWords(getKeyFromEnum(color, EColors) || '')}
-              </motion.p>
-            )}
-          </AnimatePresence>
-        </button>
-      ))}
+            <AnimatePresence>
+              {color === selectedColor && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={ANIMATION_CONFIG}
+                  className="absolute -bottom-4 whitespace-nowrap text-xs"
+                >
+                  {camelCaseToWords(getKeyFromEnum(color, EColors) || '')}
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </button>
+        ))}
+      </div>
     </div>
   )
 }
