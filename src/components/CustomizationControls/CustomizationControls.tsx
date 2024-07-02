@@ -215,7 +215,7 @@ export const CustomizationControls = () => {
   return (
     <BottomDrawer
       animate={{
-        bottom: isCollapsed ? '-140px' : '0px',
+        bottom: isCollapsed ? '-150px' : '0px',
       }}
     >
       <Actions
