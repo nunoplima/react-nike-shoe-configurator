@@ -37,7 +37,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
   const shoeRef = useRef<any | null>(null)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { nodes, materials }: { nodes: any; materials: any } = useGLTF(
-    './models/air-jordans-1.gltf',
+    '/models/air-jordans-1.gltf',
   )
 
   const steps = useCustomizationStore((state) => state.steps)
@@ -376,7 +376,6 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
           position={[-1.343, -0.908, 1.16]}
           rotation={[-1.571, -0.024, -1.571]}
           scale={0.04}
-          castShadow
         />
       </>
     ),
@@ -433,7 +432,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
   )
 
   return (
-    <group {...props} ref={shoeRef} position={[1, 1.7, 0]} scale={[1.05, 1, 1]}>
+    <group {...props} ref={shoeRef} position={[1.3, 1.4, 0]} scale-x={1.05}>
       {/* RIGHT SHOE */}
       <group rotation={[-Math.PI / 2, -0.136, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
@@ -475,4 +474,4 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
   )
 }
 
-useGLTF.preload('./models/air-jordans-1.gltf')
+useGLTF.preload('/models/air-jordans-1.gltf')
