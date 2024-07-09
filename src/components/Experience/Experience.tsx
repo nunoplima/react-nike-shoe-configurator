@@ -15,7 +15,13 @@ export const Experience = () => {
   return (
     <>
       <Environment preset="studio" environmentIntensity={0.6} />
-      <ContactShadows opacity={0.4} scale={6} blur={2} far={4} />
+      <ContactShadows
+        opacity={0.4}
+        scale={6}
+        blur={2}
+        far={4}
+        position-y={-0.3}
+      />
       <ambientLight intensity={0.6} />
 
       <CameraControls ref={cameraControlsRef} enabled />

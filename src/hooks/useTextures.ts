@@ -5,10 +5,10 @@ import { ETextures } from '../enums'
 
 export const useTextures = () => {
   const woodTextureProps = useTexture({
-    normalMap: './textures/wood/Wood_Wicker_009_normal.jpg',
-    roughnessMap: './textures/wood/Wood_Wicker_009_roughness.jpg',
-    aoMap: './textures/wood/Wood_Wicker_009_ambientOcclusion.jpg',
-    opacityMap: './textures/wood/Wood_Wicker_009_opacity.jpg',
+    normalMap: '/textures/wood/Wood_Wicker_009_normal.jpg',
+    roughnessMap: '/textures/wood/Wood_Wicker_009_roughness.jpg',
+    aoMap: '/textures/wood/Wood_Wicker_009_ambientOcclusion.jpg',
+    opacityMap: '/textures/wood/Wood_Wicker_009_opacity.jpg',
   })
 
   woodTextureProps.normalMap.repeat.set(16, 16)
@@ -25,9 +25,9 @@ export const useTextures = () => {
     THREE.RepeatWrapping
 
   const leatherTextureProps = useTexture({
-    normalMap: './textures/leather/leather_008_normal.jpg',
-    roughnessMap: './textures/leather/leather_008_roughness.jpg',
-    aoMap: './textures/leather/leather_008_ambientOcclusion.jpg',
+    normalMap: '/textures/leather/leather_008_normal.jpg',
+    roughnessMap: '/textures/leather/leather_008_roughness.jpg',
+    aoMap: '/textures/leather/leather_008_ambientOcclusion.jpg',
   })
 
   leatherTextureProps.normalMap.repeat.set(3, 3)
@@ -41,9 +41,9 @@ export const useTextures = () => {
     THREE.RepeatWrapping
 
   const fabricTextureProps = useTexture({
-    normalMap: './textures/fabric/Fabric_Knitted_006_normal.jpg',
-    roughnessMap: './textures/fabric/Fabric_Knitted_006_roughness.jpg',
-    aoMap: './textures/fabric/Fabric_Knitted_006_ambientOcclusion.jpg',
+    normalMap: '/textures/fabric/Fabric_Knitted_006_normal.jpg',
+    roughnessMap: '/textures/fabric/Fabric_Knitted_006_roughness.jpg',
+    aoMap: '/textures/fabric/Fabric_Knitted_006_ambientOcclusion.jpg',
   })
 
   fabricTextureProps.normalMap.repeat.set(6, 6)
