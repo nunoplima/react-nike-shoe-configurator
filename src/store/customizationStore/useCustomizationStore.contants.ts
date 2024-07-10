@@ -3,7 +3,7 @@ import { EColors, ESides, ESteps, ETextures } from '../../enums'
 export const FIRST_STEP = ESteps.body
 
 export const FIRST_STEP_CAMERA_POSITION: [number, number, number] = [
-  -4.5, 2, 5.5,
+  -0.2, 1.5, 6.2,
 ]
 export const INITIAL_CAMERA_POSITION: [number, number, number] = [
   FIRST_STEP_CAMERA_POSITION[0],
@@ -18,7 +18,13 @@ export const STEPS = {
       [ESides.left]: INITIAL_CAMERA_POSITION,
     },
     textures: undefined,
-    colors: [EColors.light, EColors.wolfGrey, EColors.hemp, EColors.mintFoam],
+    colors: [
+      EColors.light,
+      EColors.black,
+      EColors.wolfGrey,
+      EColors.hemp,
+      EColors.mintFoam,
+    ],
   },
 
   [ESteps.tongue]: {
@@ -29,6 +35,7 @@ export const STEPS = {
     textures: [ETextures.fabric, ETextures.leather],
     colors: [
       EColors.light,
+      EColors.black,
       EColors.wolfGrey,
       EColors.hemp,
       EColors.red,
@@ -77,6 +84,7 @@ export const STEPS = {
       EColors.light,
       EColors.black,
       EColors.wolfGrey,
+      EColors.blue,
       EColors.hemp,
       EColors.red,
       EColors.mintFoam,
@@ -99,8 +107,8 @@ export const STEPS = {
   },
   [ESteps.heel]: {
     lookAtPos: {
-      [ESides.right]: [7, 2, 0],
-      [ESides.left]: [7, 2, 0],
+      [ESides.right]: [6.5, 2, 0],
+      [ESides.left]: [6.5, 2, 0],
     },
     textures: [ETextures.fabric, ETextures.leather, ETextures.wood],
     colors: [

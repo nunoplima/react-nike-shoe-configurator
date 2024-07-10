@@ -147,6 +147,8 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
           position={[-0.077, 0.527, 1.102]}
           rotation={[0, -1.571, 0]}
           onClick={handleGoToStep(ESteps.airLogo)}
+          castShadow
+          receiveShadow
         >
           <animated.meshStandardMaterial {...heelTexture} color={heelColor} />
         </mesh>
@@ -221,6 +223,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
           position={[-0.952, 0.44, 1.227]}
           rotation={[Math.PI / 2, -1.019, Math.PI / 2]}
           receiveShadow
+          castShadow
           onClick={handleGoToStep(ESteps.tongue)}
         >
           <animated.meshStandardMaterial
@@ -365,9 +368,10 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
           material={materials['Main.011']}
           position={[-1.202, -0.931, 1.126]}
           rotation={[0, -1.571, 0]}
-          castShadow
           onClick={handleGoToStep(ESteps.upperSole)}
           material-color={upperSoleColor}
+          castShadow
+          receiveShadow
         />
         {/* top sole thread */}
         <mesh
@@ -376,6 +380,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
           position={[-1.343, -0.908, 1.16]}
           rotation={[-1.571, -0.024, -1.571]}
           scale={0.04}
+          castShadow
         />
       </>
     ),
@@ -392,35 +397,31 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
           position={[-2.289, -1.256, 0.921]}
           rotation={[Math.PI / 2, 0, -2.052]}
           material-color={soleColor}
-          castShadow
           onClick={handleGoToStep(ESteps.sole)}
         />
         {/* sole */}
-        <animated.mesh
+        <mesh
           geometry={nodes.Object_46.geometry}
           material={materials['Main.004']}
           position={[-2.325, -1.228, 1.159]}
           rotation={[Math.PI / 2, 0, -2.052]}
-          castShadow
         />
         {/* sole */}
-        <animated.mesh
+        <mesh
           geometry={nodes.Object_50.geometry}
           material={materials['Main.004']}
           position={[-1.278, -1.193, 1.176]}
           rotation={[Math.PI / 2, 0, -2.052]}
-          castShadow
         />
         {/* sole */}
-        <animated.mesh
+        <mesh
           geometry={nodes.Object_30.geometry}
           material={materials['Main.004']}
           position={[-1.355, -1.233, 1.137]}
           rotation={[Math.PI / 2, 0, -2.052]}
-          castShadow
         />
         {/* sole logo */}
-        <animated.mesh
+        <mesh
           geometry={nodes.Object_36.geometry}
           material={materials['Main.004']}
           position={[-1.131, -1.255, 1.283]}
@@ -432,7 +433,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
   )
 
   return (
-    <group {...props} ref={shoeRef} position={[1.3, 1.4, 0]} scale-x={1.05}>
+    <group {...props} ref={shoeRef}>
       {/* RIGHT SHOE */}
       <group rotation={[-Math.PI / 2, -0.136, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
