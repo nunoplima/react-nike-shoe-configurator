@@ -397,7 +397,6 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
           position={[-2.289, -1.256, 0.921]}
           rotation={[Math.PI / 2, 0, -2.052]}
           material-color={soleColor}
-          onClick={handleGoToStep(ESteps.sole)}
         />
         {/* sole */}
         <mesh
@@ -412,6 +411,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
           material={materials['Main.004']}
           position={[-1.278, -1.193, 1.176]}
           rotation={[Math.PI / 2, 0, -2.052]}
+          onClick={handleGoToStep(ESteps.sole)}
         />
         {/* sole */}
         <mesh
