@@ -13,7 +13,7 @@ export const INITIAL_CAMERA_POSITION: [number, number, number] = [
 
 export const STEPS = {
   [FIRST_STEP]: {
-    lookAtPos: {
+    cameraPos: {
       [ESides.right]: FIRST_STEP_CAMERA_POSITION,
       [ESides.left]: INITIAL_CAMERA_POSITION,
     },
@@ -28,7 +28,7 @@ export const STEPS = {
   },
 
   [ESteps.tongue]: {
-    lookAtPos: {
+    cameraPos: {
       [ESides.right]: [-6, 3, 0],
       [ESides.left]: [-6, 3, 0],
     },
@@ -44,7 +44,7 @@ export const STEPS = {
     ],
   },
   [ESteps.eyestay]: {
-    lookAtPos: {
+    cameraPos: {
       [ESides.right]: [-6, 3, 0],
       [ESides.left]: [-6, 3, 0],
     },
@@ -59,7 +59,7 @@ export const STEPS = {
     ],
   },
   [ESteps.mudguard]: {
-    lookAtPos: {
+    cameraPos: {
       [ESides.right]: [-6, 3, 3],
       [ESides.left]: [-6, 3, -3],
     },
@@ -75,7 +75,7 @@ export const STEPS = {
     ],
   },
   [ESteps.swoosh]: {
-    lookAtPos: {
+    cameraPos: {
       [ESides.right]: [2, 1.5, 4],
       [ESides.left]: [2, 1.5, -4],
     },
@@ -91,7 +91,7 @@ export const STEPS = {
     ],
   },
   [ESteps.laces]: {
-    lookAtPos: {
+    cameraPos: {
       [ESides.right]: [-6, 3, 0],
       [ESides.left]: [-6, 3, 0],
     },
@@ -106,7 +106,7 @@ export const STEPS = {
     ],
   },
   [ESteps.heel]: {
-    lookAtPos: {
+    cameraPos: {
       [ESides.right]: [6.5, 2, 0],
       [ESides.left]: [6.5, 2, 0],
     },
@@ -122,7 +122,7 @@ export const STEPS = {
     ],
   },
   [ESteps.airLogo]: {
-    lookAtPos: {
+    cameraPos: {
       [ESides.right]: [2, 3, 4],
       [ESides.left]: [2, 3, -4],
     },
@@ -137,7 +137,7 @@ export const STEPS = {
     ],
   },
   [ESteps.upperSole]: {
-    lookAtPos: {
+    cameraPos: {
       [ESides.right]: [3.5, 2, 5.5],
       [ESides.left]: [3.5, 2, 5.5],
     },
@@ -153,7 +153,7 @@ export const STEPS = {
     ],
   },
   [ESteps.sole]: {
-    lookAtPos: {
+    cameraPos: {
       [ESides.right]: [-4, -3, 0],
       [ESides.left]: [-4, -3, 0],
     },

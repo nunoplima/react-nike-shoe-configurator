@@ -43,7 +43,7 @@ const Actions: FC<IActions> = ({
 
     if (!cameraControlsRef?.current) return
 
-    const [camX, camY, camZ] = STEPS[step].lookAtPos[ESides.right]
+    const [camX, camY, camZ] = STEPS[step].cameraPos[ESides.right]
     cameraControlsRef.current.setPosition(camX, camY, camZ, true)
   }
 

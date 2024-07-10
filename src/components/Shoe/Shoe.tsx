@@ -100,7 +100,7 @@ export const Shoe: FC<PropsWithChildren> = (props) => {
         startTransition(() => goToStep(step))
 
         // look at the new step meshes
-        const [camX, camY, camZ] = STEPS[step].lookAtPos[side]
+        const [camX, camY, camZ] = STEPS[step].cameraPos[side]
         cameraControlsRef.current.setPosition(camX, camY, camZ, true)
       },
     [cameraControlsRef, goToStep],
