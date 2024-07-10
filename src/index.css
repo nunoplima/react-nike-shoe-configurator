@@ -26,3 +26,8 @@ button:focus {
 ::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
+
+img,
+p {
+  user-select: none;
+}
