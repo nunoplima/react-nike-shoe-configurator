@@ -4,33 +4,38 @@ import CustomizationControls from './components/CustomizationControls'
 import Download from './components/Download'
 import Experience from './components/Experience'
 import ShoePrice from './components/ShoePrice'
+import Footer from './components/ui/Footer'
 import { CANVAS_BG } from './constants'
 import { CameraControlsContextProvider } from './context/useCameraControlsContext'
 import { INITIAL_CAMERA_POSITION } from './store/customizationStore/useCustomizationStore.contants'
 
 function App() {
   return (
-    <CameraControlsContextProvider>
-      <Canvas
-        dpr={[window.devicePixelRatio, 2]}
-        gl={{ preserveDrawingBuffer: true }}
-        camera={{ position: INITIAL_CAMERA_POSITION }}
-        linear
-        shadows
-      >
-        {import.meta.env.DEV && <Perf position="top-left" />}
+    <>
+      <CameraControlsContextProvider>
+        <Canvas
+          dpr={[window.devicePixelRatio, 2]}
+          gl={{ preserveDrawingBuffer: true }}
+          camera={{ position: INITIAL_CAMERA_POSITION }}
+          linear
+          shadows
+        >
+          {import.meta.env.DEV && <Perf position="top-left" />}
 
-        <color attach="background" args={[CANVAS_BG]} />
+          <color attach="background" args={[CANVAS_BG]} />
 
-        <Experience />
-      </Canvas>
+          <Experience />
+        </Canvas>
+
+        <CustomizationControls />
+      </CameraControlsContextProvider>
 
       <ShoePrice />
 
       <Download />
 
-      <CustomizationControls />
-    </CameraControlsContextProvider>
+      <Footer />
+    </>
   )
 }
 

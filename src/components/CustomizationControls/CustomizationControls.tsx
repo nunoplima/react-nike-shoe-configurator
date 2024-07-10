@@ -20,6 +20,42 @@ import {
   ITextures,
 } from './CustomizationContros.types'
 
+export const CustomizationControls = () => {
+  const currentStep = useCustomizationStore((state) => state.currentStep)
+
+  const [isCollapsed, setToggleIsCollapsed] = useState(false)
+
+  const stepsKeysArray = Object.keys(STEPS) as ESteps[]
+  const currentStepIndex = stepsKeysArray.findIndex(
+    (step) => step === currentStep,
+  )
+
+  return (
+    <BottomDrawer
+      animate={{
+        bottom: isCollapsed ? '-135px' : '0px',
+      }}
+    >
+      <CustomizationControls.Actions
+        stepsKeysArray={stepsKeysArray}
+        currentStepIndex={currentStepIndex}
+        isCollapsed={isCollapsed}
+        handleToogleIsCollapsed={setToggleIsCollapsed}
+      />
+
+      <CustomizationControls.Carrousel
+        currentStep={currentStep}
+        currentStepIndex={currentStepIndex}
+        stepsTotal={stepsKeysArray.length}
+      >
+        <CustomizationControls.Textures currentStep={currentStep} />
+
+        <CustomizationControls.Colors currentStep={currentStep} />
+      </CustomizationControls.Carrousel>
+    </BottomDrawer>
+  )
+}
+
 const Actions: FC<IActions> = ({
   stepsKeysArray,
   currentStepIndex,
@@ -82,11 +118,6 @@ const Actions: FC<IActions> = ({
           <img src="/icons/arrow.svg" />
         </button>
       </div>
-
-      <Button classNames="z-10 absolute right-0 hidden md:flex">
-        <img className="h-6 w-6 pr-2" src="/icons/hamburger.svg" />
-        Menu
-      </Button>
     </>
   )
 }
@@ -171,7 +202,7 @@ const Colors: FC<IColors> = ({ currentStep }) => {
 
   return (
     <div className="flex w-full justify-center">
-      <div className="flex gap-4 overflow-x-auto pb-4">
+      <div className="flex gap-4 overflow-x-auto pb-6">
         {colors.map((color) => (
           <button
             key={color}
@@ -202,38 +233,7 @@ const Colors: FC<IColors> = ({ currentStep }) => {
   )
 }
 
-export const CustomizationControls = () => {
-  const currentStep = useCustomizationStore((state) => state.currentStep)
-
-  const [isCollapsed, setToggleIsCollapsed] = useState(false)
-
-  const stepsKeysArray = Object.keys(STEPS) as ESteps[]
-  const currentStepIndex = stepsKeysArray.findIndex(
-    (step) => step === currentStep,
-  )
-
-  return (
-    <BottomDrawer
-      animate={{
-        bottom: isCollapsed ? '-150px' : '0px',
-      }}
-    >
-      <Actions
-        stepsKeysArray={stepsKeysArray}
-        currentStepIndex={currentStepIndex}
-        isCollapsed={isCollapsed}
-        handleToogleIsCollapsed={setToggleIsCollapsed}
-      />
-
-      <Carrousel
-        currentStep={currentStep}
-        currentStepIndex={currentStepIndex}
-        stepsTotal={stepsKeysArray.length}
-      >
-        <Textures currentStep={currentStep} />
-
-        <Colors currentStep={currentStep} />
-      </Carrousel>
-    </BottomDrawer>
-  )
-}
+CustomizationControls.Actions = Actions
+CustomizationControls.Carrousel = Carrousel
+CustomizationControls.Textures = Textures
+CustomizationControls.Colors = Colors
