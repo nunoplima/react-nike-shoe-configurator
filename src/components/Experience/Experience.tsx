@@ -21,6 +21,7 @@ export const Experience = () => {
         maxPolarAngle={Math.PI}
         enablePan={false}
         enableRotate={false}
+        enableZoom={false}
         makeDefault
         maxDistance={Math.PI * 3}
         minDistance={Math.PI * 1.3}
