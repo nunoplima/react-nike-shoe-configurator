@@ -20,7 +20,7 @@ export const Experience = () => {
         ref={cameraControlsRef}
         touches={{
           one: CameraControls.ACTION.TOUCH_ROTATE,
-          two: CameraControls.ACTION.TOUCH_DOLLY_TRUCK,
+          two: CameraControls.ACTION.TOUCH_ROTATE,
           three: CameraControls.ACTION.TOUCH_ROTATE,
         }}
         mouseButtons={{
@@ -32,7 +32,6 @@ export const Experience = () => {
         maxPolarAngle={Math.PI}
         maxDistance={Math.PI * 3}
         minDistance={Math.PI * 1.5}
-        draggingSmoothTime={0.2}
         enabled
         makeDefault
       />
