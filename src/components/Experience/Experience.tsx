@@ -1,9 +1,9 @@
 import {
-  CameraControls,
   ContactShadows,
   Environment,
-  OrbitControls,
+  CameraControls as R3DCameraControls,
 } from '@react-three/drei'
+import CameraControls from 'camera-controls'
 import { Suspense } from 'react'
 import useCameraControlsContext from '../../context/useCameraControlsContext'
 import { useIsMobile } from '../../hooks/useIsMobile'
@@ -16,13 +16,24 @@ export const Experience = () => {
 
   return (
     <>
-      <CameraControls ref={cameraControlsRef} enabled />
-      <OrbitControls
+      <R3DCameraControls
+        ref={cameraControlsRef}
+        touches={{
+          one: CameraControls.ACTION.TOUCH_ROTATE,
+          two: CameraControls.ACTION.TOUCH_DOLLY_TRUCK,
+          three: CameraControls.ACTION.TOUCH_ROTATE,
+        }}
+        mouseButtons={{
+          left: CameraControls.ACTION.ROTATE,
+          middle: CameraControls.ACTION.ROTATE,
+          right: CameraControls.ACTION.ROTATE,
+          wheel: CameraControls.ACTION.DOLLY,
+        }}
         maxPolarAngle={Math.PI}
-        enablePan={false}
-        enableRotate={false}
         maxDistance={Math.PI * 3}
         minDistance={Math.PI * 1.5}
+        draggingSmoothTime={0.2}
+        enabled
         makeDefault
       />
 
