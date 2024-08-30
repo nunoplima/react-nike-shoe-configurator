@@ -42,20 +42,16 @@ export const Experience = () => {
         frames={1}
       />
 
+      <ambientLight intensity={0.4} />
+
       <directionalLight
-        position={[-2, 3, 0]}
-        intensity={2}
+        intensity={3}
+        position={[-1, 3, 0]}
         shadow-camera-near={0.1}
         shadow-camera-far={5}
         shadow-mapSize-height={512}
         shadow-mapSize-width={512}
         castShadow
-      />
-      <directionalLight position={[2, 3, 0]} intensity={3} castShadow={false} />
-      <directionalLight
-        position={[0, -3, 0]}
-        intensity={2}
-        castShadow={false}
       />
 
       <Suspense fallback={<Loading />}>
